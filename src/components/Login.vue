@@ -9,12 +9,12 @@
         <h1>Sign In</h1>
       </div>
       
-      <form id="registrationForm" @submit.prevent="login"> 
+      <form id="logInForm" @submit.prevent="login"> 
 
         <div class="inputFields"> 
 
-          <label for="emailOrUsername">Email or Username</label>
-          <input type="text" id="emailOrUsername" v-model="emailOrUsername" placeholder="Enter your email" required>
+          <label for="email">Email</label>
+          <input type="text" id="email" v-model="email" placeholder="Enter your email" required>
           
           <label for="passwordInput">Your Password</label>
           <input type="password" id="passwordInput" v-model="password" placeholder="Enter your password" required>
@@ -63,7 +63,7 @@ export default {
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     alert('Successfully logged in');
-                    this.$router.push({name: 'ProfileListings'});
+                    this.$router.push({name: 'Discovery'}); //route name to be changed based on router
                 })
                 .catch(error => {
                     alert(error.message);
@@ -72,7 +72,7 @@ export default {
 
           // To direct users to the Sign Up page if they have not yet created an account
         goToSignUp() {
-            this.$router.push({name: 'SignUpDisplay'})
+            this.$router.push({name: 'SignUpPage'})
         },
 
          // To direct users to the Forget Password page if they have forgotten their password
@@ -95,6 +95,11 @@ export default {
 #imageContainer {
     margin-top: 13vh;
     flex: 0.6;
+}
+
+#imageContainer img {
+    width: 70%;
+    height: auto;
 }
 
 #formContainer {
