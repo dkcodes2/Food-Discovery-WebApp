@@ -21,6 +21,9 @@
         </tr>
     </table> <br> <br> -->
 
+
+    
+
 </template>
 
 <script>
@@ -32,10 +35,18 @@ const db = getFirestore(firebaseApp);
 
 export default {
     mounted() {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+            }
+        })
+        
         async function display(){
-            let allDocuments = await getDocs(collection(db, "Portfolio")) // TODO: change to get all users
+            let allDocuments = await getDocs(collection(db, "Users")) // TODO: change to get all users
             // change to filter allDocuments by username match
             
+            let searchText; // TO GET THIS FROM ANOTHER COMPONENT
             let index = 1;
             // let totalProfit = 0;
 
@@ -47,25 +58,29 @@ export default {
                 // let buyPrice = (documentData.Buy_Price)
                 // let buyQuantity = (documentData.Buy_Quantity)
 
-                let view = document.getElementById("usersQueryView")
-                
-                var profileDiv = document.getElementById.createElement('div')
-                profileDiv.className = "profile"
+                let username = (documentData.Username)
+                let profileDescription = (documentData.User_Description)
 
-                var nameDiv = document.getElementById.createElement('div') //TODO HTML for this
-                var name = documentData.username
-                var nameTitle = `${index}. ${name}`
-                nameDiv.innerHTML = nameTitle
+                if (username.startsWith(searchText)) {
+                    let view = document.getElementById("usersQueryView")
+                    
+                    var profileDiv = document.getElementById.createElement('div')
+                    profileDiv.className = "profile"
 
-                var descriptionDiv = document.getElementById.createElement('div');
-                descriptionDiv.innerHTML = documentData.profileDescription
+                    var nameDiv = document.getElementById.createElement('div') //TODO HTML for this
 
-                profileDiv.appendChild("nameDiv");
-                profileDiv.appendChild("descriptionDiv");
-                view.appendChild("profileDiv");
-                var br = document.createElement("br");
-                view.appendChild(br);
-                
+                    var nameTitle = `${index}. ${username}`
+                    nameDiv.innerHTML = nameTitle
+
+                    var descriptionDiv = document.getElementById.createElement('div');
+                    descriptionDiv.innerHTML = documentData.profileDescription
+
+                    profileDiv.appendChild("nameDiv");
+                    profileDiv.appendChild("descriptionDiv");
+                    view.appendChild("profileDiv");
+                    var br = document.createElement("br");
+                    view.appendChild(br);
+                }
                 // let table = document.getElementById("table")
                 // let row = table.insertRow(index);
 

@@ -3,6 +3,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth"
 
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
+import userQueryDisplayPage from '@/views/userQueryDisplayPage.vue';
 
 const auth = getAuth();
 
@@ -17,6 +18,11 @@ const routes = [
     name: "SignUpPage",
     component: SignUpPage,
   },
+  {
+    path: "/userquerydisplay",
+    name: "UserQueryDisplayPage",
+    component: userQueryDisplayPage,
+  }
 ];
 
 
