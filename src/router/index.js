@@ -3,7 +3,12 @@ import {getAuth, onAuthStateChanged} from "firebase/auth"
 
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
-import OwnProfilePage from '@/views/OwnProfilePage.vue';
+import HomePage from '@/views/HomePage.vue';
+import Japanese from '@/views/Japanese.vue';
+import Korean from '@/views/Korean.vue';
+import Western from '@/views/Western.vue';
+import Local from '@/views/Local.vue';
+import Others from '@/views/Others.vue';
 
 const auth = getAuth();
 
@@ -19,9 +24,34 @@ const routes = [
     component: SignUpPage,
   },
   {
-    path: "/ownProfile",
-    name: "OwnProfilePage",
-    component: OwnProfilePage,
+    path: "/homepage",
+    name: "HomePage",
+    component: HomePage,
+  },
+  { 
+      path: '/Japanese', 
+      name: 'Japanese', 
+      component: Japanese 
+  },
+  { 
+      path: '/Korean', 
+      name: 'Korean', 
+      component: Korean
+  },
+  {
+      path: '/Western',
+      name: 'Western',
+      component: Western
+  },
+  {
+      path: '/Local',
+      name: 'Local',
+      component: Local
+  },
+  {
+      path: '/Others',
+      name: 'Others',
+      component: Others
   }
 ];
 
