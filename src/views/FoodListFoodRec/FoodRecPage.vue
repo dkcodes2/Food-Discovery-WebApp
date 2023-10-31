@@ -28,10 +28,8 @@
             //each element of pastposts should be the "Caption" of the past post,
             //and the URL of the past post
         onMounted(async () => {
-
             const querySnapshot = await db.collection('pastposts').get();
             pastposts.value = querySnapshot.docs.map(doc => doc.data ())
-        
             //here I will calling the array of past-posts to store past post data into an array of past-posts.
             //I should make it call only the Caption and the URL in which it is stored.
         });
