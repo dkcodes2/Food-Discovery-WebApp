@@ -9,7 +9,7 @@
 
     import { ref, onMounted } from 'vue';
     import { db } from '@/firebaseConfig.js'; 
-    import PostsContainerAQ from "@\components\food-list-enabling-components\PostsContainerAQ.vue";
+    import PostsContainer from "@\components\profile-page-components\PostsContainer.vue";
     
     export default {
         name: "FoodRecPage",
@@ -19,24 +19,44 @@
             FoodRecs
         }, 
         props: {
+            postCaption: { //call the caption from PostItems
+                type: String,
+                required: true
+            }
+            postURL: {
+                type:URL
+                required: true
+            }
 
-        }
+            //add: date/time, cuisine, if possible
+                }}
 
         setup() {
         const pastposts = ref([]);
-            //all the past posts must be given to "pastposts"
+            //each Post is a food recommendation and must be given to "pastposts"
             //each element of pastposts should be the "Caption" of the past post,
             //and the URL of the past post
         onMounted(async () => {
             const querySnapshot = await db.collection('pastposts').get();
             pastposts.value = querySnapshot.docs.map(doc => doc.data ())
-            //here I will calling the array of past-posts to store past post data into an array of past-posts.
-            //I should make it call only the Caption and the URL in which it is stored.
+
+            //call the PostContainer from firebase
         });
         
-        return pastposts;
-        
+        return {
+            pastposts;
         }
+
+          //data() {
+        //  return {
+        //            //fetch from API or via props.
+        //            pastposts: [
+            //            {title: 'Post 1', url: 'URL 1' },
+            //            {title: ''Post 2', url: 'URL 2' },
+        //            // ... more food posts
+        //            ]
+        //        };
+        //}
     }
 </script>
 
