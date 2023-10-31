@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import {getAuth, onAuthStateChanged} from "firebase/auth"
 
+import userQueryDisplayPage from '@/views/userQueryDisplayPage.vue';
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
-import userQueryDisplayPage from '@/views/userQueryDisplayPage.vue';
 import HomePage from '@/views/HomePage.vue';
 import Japanese from '@/views/Japanese.vue';
 import Korean from '@/views/Korean.vue';
@@ -14,7 +14,7 @@ import Others from '@/views/Others.vue';
 const auth = getAuth();
 
 const routes = [
-  {
+    {
     path: "/",
     name: "LogInPage",
     component: LogInPage,
@@ -25,9 +25,6 @@ const routes = [
     component: SignUpPage,
   },
   {
-    path: "/userquerydisplay",
-    name: "UserQueryDisplayPage",
-    component: userQueryDisplayPage,
     path: "/homepage",
     name: "HomePage",
     component: HomePage,
@@ -56,6 +53,11 @@ const routes = [
       path: '/Others',
       name: 'Others',
       component: Others
+  },
+  {
+    path: "/userquerydisplay",
+    name: "UserQueryDisplayPage",
+    component: userQueryDisplayPage,
   }
 ];
 
