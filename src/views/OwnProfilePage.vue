@@ -11,19 +11,19 @@
 </template>
 
 <script>
-import UserProfileInfo from "@/components/UserProfileInfo.vue";
-import PostsContainer from "@/components/PostsContainer.vue";
+import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
+/*import PostsContainer from "@/components/PostsContainer.vue";
 import FoodListsContainer from "@/components/FoodListsContainer.vue";
 import ShareProfileButton from "@/components/FollowButton.vue";
-import TabSelector from "@/components/TabSelector.vue";
+import TabSelector from "@/components/TabSelector.vue";*/
 
 export default {
-    name: "OthersProfilePage",
+    name: "OwnProfilePage",
     components: {
         UserProfileInfo,
-        PostsContainer,
+        /*PostsContainer,
         FollowButton,
-        ShareProfileButton,
+        ShareProfileButton,*/
     },
     data() {
         return {
@@ -38,3 +38,5 @@ export default {
 <style scoped>
 /* Styles specific to the OthersProfilePage. */
 </style>
+
+

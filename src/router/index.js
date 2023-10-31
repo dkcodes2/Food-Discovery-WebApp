@@ -3,6 +3,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth"
 
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
+import OwnProfilePage from '@/views/OwnProfilePage.vue';
 
 const auth = getAuth();
 
@@ -17,6 +18,11 @@ const routes = [
     name: "SignUpPage",
     component: SignUpPage,
   },
+  {
+    path: "/ownProfile",
+    name: "OwnProfilePage",
+    component: OwnProfilePage,
+  }
 ];
 
 
