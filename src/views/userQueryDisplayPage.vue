@@ -1,24 +1,33 @@
 <!-- FollowingPage.vue -->
 <template>
     <div>
-      <userQueryDisplay />
+        <navBar />
+        <userQueryDisplay :searchText = searchString />
     </div>
+
+    <p>
+        Search String: {{  searchString }}
+    </p>
+
 </template>
   
   <script>
   import { ref, onMounted } from 'vue';
+  import navBar from '@/components/NavBar.vue';
   import userQueryDisplay from "@/components/UserQueryDisplay.vue";
   
   export default {
     name: "UserQueryDisplayPage",
     components: {
-      userQueryDisplay
+        navBar,
+        userQueryDisplay
     },
-    setup() {
-
-  
+        props: {
+            searchString: String
+        },
+    
+        setup() {
       onMounted(async () => {
-
       });
   
       return {

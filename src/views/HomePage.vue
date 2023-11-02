@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/home-page-component/NavBar.vue';
+import NavBar from '@/components/NavBar.vue';
 import DiscoveryFeed from '../components/home-page-component/DiscoveryFeed.vue';
 import CuisineBar from '../components/home-page-component/CuisineBar.vue';
 

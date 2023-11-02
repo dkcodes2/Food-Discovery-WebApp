@@ -1,15 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 import {getAuth, onAuthStateChanged} from "firebase/auth"
 
-import userQueryDisplayPage from '@/views/userQueryDisplayPage.vue';
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
+
 import HomePage from '@/views/HomePage.vue';
 import Japanese from '@/views/Japanese.vue';
 import Korean from '@/views/Korean.vue';
 import Western from '@/views/Western.vue';
 import Local from '@/views/Local.vue';
 import Others from '@/views/Others.vue';
+
+import userQueryDisplayPage from '@/views/userQueryDisplayPage.vue';
+
 
 const auth = getAuth();
 
@@ -58,7 +61,9 @@ const routes = [
     path: "/userquerydisplay",
     name: "UserQueryDisplayPage",
     component: userQueryDisplayPage,
-  }
+
+    props: route => ({searchString: route.query.q})
+  },
 ];
 
 
