@@ -1,9 +1,22 @@
+<!-- TEMPORARILY NOT IN USE -->
+
 <template>
 
     <div id = "page-title">Search Results</div>
     <div id = "user-query">You searched for: {{ searchText }} </div>
 
-    <div id="userQueryView"></div>
+    <div class="queryContainer">
+        <!-- <div class="queryItem" v-for = "friend in searchList" key="friend.username"> -->
+        <div class="queryItem" v-for = "friend in searchList">
+        <router-link :to ="{name: 'HomePage', query: {q: friend.username}}">
+            <span class = "itemname"> {{ friend.username }} </span><br>
+            <p> {{ friend.user_description }}</p>
+        </router-link>
+        </div>
+
+    </div>
+
+    <!-- <div id="userQueryView"></div> -->
 
     <!-- <h1 id = "Current"> Current portfolio</h1>
     <h1>Search Results</h1> -->
@@ -21,108 +34,164 @@
         </tr>
     </table> <br> <br> -->
 
+
+    
+
 </template>
 
 <script>
-import firebaseApp from "../firebase.js"
+import drigmo2 from "../firebase.js"
 import {getFirestore} from "firebase/firestore"
-import {collection, getDocs, doc, deleteDoc} from "firebase/firestore"
+import {collection, query, where, getDocs, doc, deleteDoc} from "firebase/firestore"
 
-const db = getFirestore(firebaseApp);
+const db = getFirestore(drigmo2);
 
 export default {
-    mounted() {
-        async function display(){
-            let allDocuments = await getDocs(collection(db, "Portfolio")) // TODO: change to get all users
-            // change to filter allDocuments by username match
-            
-            let index = 1;
-            // let totalProfit = 0;
-
-            allDocuments.forEach((docs) => {
-                let documentData= docs.data()
-
-                // let coin = (documentData.Coin)
-                // let ticker = (documentData.Ticker)
-                // let buyPrice = (documentData.Buy_Price)
-                // let buyQuantity = (documentData.Buy_Quantity)
-
-                let view = document.getElementById("usersQueryView")
-                
-                var profileDiv = document.getElementById.createElement('div')
-                profileDiv.className = "profile"
-
-                var nameDiv = document.getElementById.createElement('div') //TODO HTML for this
-                var name = documentData.username
-                var nameTitle = `${index}. ${name}`
-                nameDiv.innerHTML = nameTitle
-
-                var descriptionDiv = document.getElementById.createElement('div');
-                descriptionDiv.innerHTML = documentData.profileDescription
-
-                profileDiv.appendChild("nameDiv");
-                profileDiv.appendChild("descriptionDiv");
-                view.appendChild("profileDiv");
-                var br = document.createElement("br");
-                view.appendChild(br);
-                
-                // let table = document.getElementById("table")
-                // let row = table.insertRow(index);
-
-                // let cell1 = row.insertCell(0); let cell2 = row.insertCell(1); let cell3 = row.insertCell(2);
-                // let cell4 = row.insertCell(3); let cell5 = row.insertCell(4); let cell6 = row.insertCell(5);
-                // let cell7 = row.insertCell(6); let cell8 = row.insertCell(7);
-
-                // cell1.innerHTML = index;
-                // cell2.innerHTML = coin;
-                // cell3.innerHTML = ticker;
-                // cell4.innerHTML = buyPrice;
-                // cell5.innerHTML = buyQuantity;
-                // cell6.innerHTML = 0;
-                // cell7.innerHTML = 0;
-
-                // cell7.className = "profits";
-
-                // let deleteButton = document.createElement("button");
-                
-                // deleteButton.id = String(coin)
-                // deleteButton.className = "bwt";
-                // deleteButton.innerHTML = "Delete";
-
-                // cell8.appendChild(deleteButton)
-                // deleteButton.onclick = function() {
-                //     deleteInstrument(coin);
-                // }
-
-        // async function profitCalculator(ticker){
-        //     let binance = new ccxt.binance();
-        //     let x = await binance.fetch_ohlcv(ticker, "5m");
-        //     cell6.innerHTML = x[499][4];
-        //     cell7.innerHTML = Math.round(buyQuantity * (parseFloat(cell6.innerHTML) - parseFloat(buyPrice)));
-                
-        //     totalProfit = totalProfit  + parseFloat(cell7.innerHTML);
-        //     document.getElementById("totalProfit").innerHTML = (" Total Profit is : $ " + String(totalProfit));
-        // }
-
-        // profitCalculator(ticker);
-        index+= 1;
-        })
-    }
-    display();
     
-    // async function deleteInstrument(coin){
-    //     alert("You are going to delete " + coin)
-    //     await deleteDoc(doc(db, "Portfolio", coin))
-    //     console.log("Document successfully deleted!", coin);
-    //     let tb = document.getElementById("table")
-    //     while (tb.rows.length > 1) {
-    //         tb.deleteRow(1)
-    //     }
-    //     document.getElementById("totalProfit").innerHTML = ""
-    //     display()
-    // }
+    
+    
+    data() {
+        return {
+            searchList: [],
+            user: false
+        }
+    },
+
+    props: {
+        searchText: String
+    },
+
+    methods: {
+        async searchFriends(stxt) {
+            let q = query(collection(db, "Users"), where('username', '>=', stxt), where("username", "<", stxt + "\uf8ff"))
+            //let q = query(collection(db, "Users"), where('username', '>=', stxt))
+            // let q = query (collection(db, "Users"))
+            let allDocuments = await getDocs(q)
+            this.searchList = []
+            allDocuments.forEach((doc) => {
+                this.searchList.push(doc.data()) 
+            })
+        }
+    },
+
+    watch: {
+        searchText: {
+            immediate: true,
+            handler(val, oldVal) {
+                this.searchFriends(val)
+            }
+        }
+    },
+
+    created() {
+        this.searchFriends(this.searchText)
     }
-}
+    }
+    
+//     mounted() {
+//         const auth = getAuth();
+//         onAuthStateChanged(auth, (user) => {
+//             if (user) {
+//                 this.user = user
+//             }
+//     })
+        
+//         async function display(){
+//             let allDocuments = await getDocs(collection(db, "Users")) // TODO: change to get all users
+//             // change to filter allDocuments by username match
+            
+//             let searchText; // TO GET THIS FROM ANOTHER COMPONENT
+//             let index = 1;
+//             // let totalProfit = 0;
+
+//             allDocuments.forEach((docs) => {
+//                 let documentData= docs.data()
+
+//                 // let coin = (documentData.Coin)
+//                 // let ticker = (documentData.Ticker)
+//                 // let buyPrice = (documentData.Buy_Price)
+//                 // let buyQuantity = (documentData.Buy_Quantity)
+
+//                 let username = (documentData.Username)
+//                 let profileDescription = (documentData.User_Description)
+
+//                 if (username.startsWith(searchText)) {
+//                     let view = document.getElementById("usersQueryView")
+                    
+//                     var profileDiv = document.getElementById.createElement('div')
+//                     profileDiv.className = "profile"
+
+//                     var nameDiv = document.getElementById.createElement('div') //TODO HTML for this
+
+//                     var nameTitle = `${index}. ${username}`
+//                     nameDiv.innerHTML = nameTitle
+
+//                     var descriptionDiv = document.getElementById.createElement('div');
+//                     descriptionDiv.innerHTML = documentData.profileDescription
+
+//                     profileDiv.appendChild("nameDiv");
+//                     profileDiv.appendChild("descriptionDiv");
+//                     view.appendChild("profileDiv");
+//                     var br = document.createElement("br");
+//                     view.appendChild(br);
+//                 }
+//                 // let table = document.getElementById("table")
+//                 // let row = table.insertRow(index);
+
+//                 // let cell1 = row.insertCell(0); let cell2 = row.insertCell(1); let cell3 = row.insertCell(2);
+//                 // let cell4 = row.insertCell(3); let cell5 = row.insertCell(4); let cell6 = row.insertCell(5);
+//                 // let cell7 = row.insertCell(6); let cell8 = row.insertCell(7);
+
+//                 // cell1.innerHTML = index;
+//                 // cell2.innerHTML = coin;
+//                 // cell3.innerHTML = ticker;
+//                 // cell4.innerHTML = buyPrice;
+//                 // cell5.innerHTML = buyQuantity;
+//                 // cell6.innerHTML = 0;
+//                 // cell7.innerHTML = 0;
+
+//                 // cell7.className = "profits";
+
+//                 // let deleteButton = document.createElement("button");
+                
+//                 // deleteButton.id = String(coin)
+//                 // deleteButton.className = "bwt";
+//                 // deleteButton.innerHTML = "Delete";
+
+//                 // cell8.appendChild(deleteButton)
+//                 // deleteButton.onclick = function() {
+//                 //     deleteInstrument(coin);
+//                 // }
+
+//         // async function profitCalculator(ticker){
+//         //     let binance = new ccxt.binance();
+//         //     let x = await binance.fetch_ohlcv(ticker, "5m");
+//         //     cell6.innerHTML = x[499][4];
+//         //     cell7.innerHTML = Math.round(buyQuantity * (parseFloat(cell6.innerHTML) - parseFloat(buyPrice)));
+                
+//         //     totalProfit = totalProfit  + parseFloat(cell7.innerHTML);
+//         //     document.getElementById("totalProfit").innerHTML = (" Total Profit is : $ " + String(totalProfit));
+//         // }
+
+//         // profitCalculator(ticker);
+//         index+= 1;
+//         })
+//     }
+//     display();
+    
+//     async function deleteInstrument(coin){
+//         alert("You are going to delete " + coin)
+//         await deleteDoc(doc(db, "Portfolio", coin))
+//         console.log("Document successfully deleted!", coin);
+//         let tb = document.getElementById("table")
+//         while (tb.rows.length > 1) {
+//             tb.deleteRow(1)
+//         }
+//         document.getElementById("totalProfit").innerHTML = ""
+//         display()
+//     }
+//     }
+
 
 </script>
 
