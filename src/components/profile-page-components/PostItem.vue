@@ -1,18 +1,152 @@
 <template>
-    <div class="post-item"> 
-        <div class="posts-caption">
-        <h1 class="caption inter-bold-black-30px">What to order at Heng Mui Keng Sushi</h1>
-        <p class="description inter-light-black-30px">
-        Why these sushi are a must-try when you visit this exquisite
-        Japanese restaurant in the West
-        </p> 
+  <div class="post-item">
+    <div class="images">
+      <div class="div">
+        <div class="column">
+          <img
+            loading="lazy"
+            srcSet="..."
+            class="img"
+          />
         </div>
-        <img class="image-3-of-post" sro= "image-3-of-post-5.png" alt="Image 3 of Post" />
-        <img class="image-2-of-post" src= "image-2-of-post -5.png" alt="Image 2 of Post" />
-        <img class="image-1-of-post" src= "image-1-of-post -15.png" alt= "Image 1 of Post" /> 
+        <div class="column-2">
+          <img
+            loading="lazy"
+            srcSet="..."
+            class="img"
+          />
+        </div>
+        <div class="column-3">
+          <img
+            loading="lazy"
+            srcSet="..."
+            class="img-2"
+          />
+        </div>
+      </div>
     </div>
-
+    <div class="caption">What to order at Heng Mui Keng Sushi</div>
+    <div class="description">
+      Why these sushi are a must-try when you visit this exquisite Japanese
+      restaurant in the West
+    </div>
+  </div>
 </template>
+
+
+<style scoped>
+.post-item {
+  display: flex;
+  flex-direction: column;
+}
+.images {
+  align-self: stretch;
+  position: relative;
+}
+@media (max-width: 991px) {
+  .images {
+    max-width: 100%;
+  }
+}
+.div {
+  gap: 20px;
+  display: flex;
+}
+@media (max-width: 991px) {
+  .div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 33%;
+  margin-left: 0px;
+}
+@media (max-width: 991px) {
+  .column {
+    width: 100%;
+  }
+}
+.img {
+  aspect-ratio: 1.51;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  overflow: hidden;
+  flex-grow: 1;
+}
+@media (max-width: 991px) {
+  .img {
+    margin-top: 23px;
+  }
+}
+.column-2 {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 33%;
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  .column-2 {
+    width: 100%;
+  }
+}
+.column-3 {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 33%;
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  .column-3 {
+    width: 100%;
+  }
+}
+.img-2 {
+  aspect-ratio: 1.51;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  overflow: hidden;
+  flex-grow: 1;
+}
+@media (max-width: 991px) {
+  .img-2 {
+    margin-top: 22px;
+  }
+}
+.caption {
+  color: rgba(0, 0, 0, 0.97);
+  align-self: stretch;
+  position: relative;
+  margin-top: 22px;
+  font: 700 30px Inter, sans-serif;
+}
+@media (max-width: 991px) {
+  .caption {
+    max-width: 100%;
+  }
+}
+.description {
+  color: rgba(0, 0, 0, 0.97);
+  align-self: stretch;
+  position: relative;
+  margin-top: 28px;
+  font: 300 30px Inter, sans-serif;
+}
+@media (max-width: 991px) {
+  .description {
+    max-width: 100%;
+  }
+}
+</style>
+
     
 <script> //to be linked to Firebase 
 export default {
@@ -37,65 +171,3 @@ export default {
   }
 };
 </script>
-
-
-<style>
-    .post-item-container {
-    cursor: pointer;
-    height: 382px;
-    position: relative;
-    transition: all 0.2s ease ;
-    width: 1300px;
-    }
-
-    .post-item-container :hover {
-        transform: translate(0, -5px):
-        box-shadow: Opx 12px 5px -8px Orgba(0, 0, 0, 0.2) ;
-        .posts-caption {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        height: 87px;
-        left: 3px;
-        position: absolute;
-        top: 295px;
-        width: 1301px;
-    
-    }
-    .caption {
-        height: 38px;
-        letter-spacing: 0; line-height: normal;
-        width: 860px;
-    }
-
-    .description {
-        height: 31px;
-        letter-spacing: 0;
-        line-height: normal; white-space: nowrap;
-        width: 1297px;
-    }
-
-    .image-3-of-post {
-        height: 278px;
-        left: 443px;
-        position: absolute;
-        top: 1px;
-        width: 420px;
-    }
-    
-    .image-2-of-post {
-        height: 278px;
-        left: 0;
-        position: absolute;
-        top: 1px;
-        width: 420px;
-    }
-
-    .image-1-of-post {
-        height: 279px;
-        left: 880px;
-        position: absolute;
-        top: 0;
-        width: 420px;
-    }
-</style>

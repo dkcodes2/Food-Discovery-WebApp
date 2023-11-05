@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import UserProfileInfo from "@/components/UserProfileInfo.vue";
-import PostsContainer from "@/components/PostsContainer.vue";
-import FoodListsContainer from "@/components/FoodListsContainer.vue";
-import FollowButton from "@/components/FollowButton.vue";
-import ShareProfileButton from "@/components/ShareProfileButton.vue";
-import TabSelector from "@/components/TabSelector.vue";
+import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
+import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
+//import FoodListsContainer from "@/components/profile-page-components/FoodListsContainer.vue";
+import FollowButton from "@/components/profile-page-components/FollowButton.vue";
+import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
+//import TabSelector from "@/components/profile-page-components/TabSelector.vue";
 
 export default {
     name: "OthersProfilePage",
@@ -25,6 +25,7 @@ export default {
         PostsContainer,
         FollowButton,
         ShareProfileButton,
+        //TabSelector
     },
     data() {
         return {

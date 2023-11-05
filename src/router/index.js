@@ -9,6 +9,9 @@ import Korean from '@/views/Korean.vue';
 import Western from '@/views/Western.vue';
 import Local from '@/views/Local.vue';
 import Others from '@/views/Others.vue';
+import OthersProfilePage from '@/views/OthersProfilePage.vue';
+import OwnProfilePage from '@/views/OwnProfilePage.vue'; 
+import FollowingPage from '@/views/FollowingPage.vue'; 
 
 const auth = getAuth();
 
@@ -52,6 +55,21 @@ const routes = [
       path: '/Others',
       name: 'Others',
       component: Others
+  },
+  {
+    path: '/OwnProfilePage',
+    name: 'OwnProfilePage',
+    component: OwnProfilePage
+  },
+  {
+  path: '/OthersProfilePage',
+  name: 'OthersProfilePage',
+  component: OthersProfilePage 
+  },
+  {
+    path: '/FollowingPage',
+    name: 'FollowingPage',
+    component: FollowingPage
   }
 ];
 

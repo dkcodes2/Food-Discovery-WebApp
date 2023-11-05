@@ -14,11 +14,7 @@
     name: "UserProfileStats",
     data() {
       return {
-        stats: [ <!--- to be fetched from Firebase -->
-          { title: 'Posts', value: 17 },
-          { title: 'Food Lists', value: 2 },
-          { title: 'Following', value: 32 }
-        ]
+      
       }
     }
   }

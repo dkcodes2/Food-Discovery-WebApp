@@ -63,7 +63,7 @@ export default {
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     alert('Successfully logged in');
-                    this.$router.push({name: 'HomePage'}); //route name to be changed based on router
+                    this.$router.push({name: 'OwnProfilePage'}); //route name to be changed based on router
                 })
                 .catch(error => {
                     alert(error.message);

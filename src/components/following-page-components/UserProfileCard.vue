@@ -2,19 +2,12 @@
 <template>
     <div class="profile-card">
       <img :src="user.profileImage" alt="User Profile" />
-      <h2>{{ user.name }}</h2>
-      <p>{{ user.bio }}</p>
+      <h2>profile 1</h2>
+      <h2>profile 2</h2>
       <!-- Additional details and options like unfollow or send message -->
     </div>
-  </template>
-  <!-- UserProfileCard.vue -->
-<template>
-  <div class="profile-card">
-    <img :src="user.avatar" :alt="`${user.name} Avatar`">
-    <h2>{{ user.name }}</h2>
-    <p>{{ user.bio }}</p>
-  </div>
 </template>
+  <!-- UserProfileCard.vue -->
 
 <script>
 export default {
