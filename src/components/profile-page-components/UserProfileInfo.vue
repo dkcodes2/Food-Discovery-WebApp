@@ -4,30 +4,96 @@
       <div class="div">
         <div class="column">
           <img
+            :src="userImage"
             loading="lazy"
-            srcSet="..."
-            class="img"
+            :srcset="userImageSrcSet"
+            class="profile-pic"
+            alt="Profile Picture"
           />
-          <div class="name">Ah Beng</div>
+          <div class="name">{{ userName }}</div>
         </div>
         <div class="column-2">
           <div class="posts">Posts</div>
-          <div class="no-of-posts">17</div>
+          <div class="no-of-posts">{{  userPosts }}</div>
         </div>
         <div class="column-3">
           <div class="div-2">Following</div>
-          <div class="no-of-following">2</div>
+          <div class="no-of-following">{{ userFollowing }}</div>
         </div>
       </div>
     </div>
     <div class="biography">
-      Hi friends! Welcome to my page where I share all my favourite Japanese
-      restaurants!
+      {{ userBio}}
     </div>
   </div>
 </template>
 
+<script>
+import drigmo2 from "../../firebase.js"
+import {getFirestore} from "firebase/firestore"
+import {collection, query, where, getDocs, doc, deleteDoc} from "firebase/firestore"
 
+const db = getFirestore(drigmo2);
+
+export default {
+  name: "UserProfileInfo",
+  props: {
+    uid: {
+      type: String,
+      required: true
+    },
+    userName: {
+      type: String,
+      default: 'Username',
+      required: true
+    },
+    userBio: {
+      type: String,
+      default: 'This user has no biography.'
+    },
+    userImage: {
+      type: String,
+      required: true
+    },
+    userImageSrcSet: {
+      type: String,
+      default: ''
+    },
+    userPosts: {
+      type: [String, Number],
+      default: '0'
+    },
+    userFollowing: {
+      type: [String, Number],
+      default: '0'
+    }
+  },
+  data() {
+    return {
+      profileData: null,
+      userId: ''
+    };
+  },
+  created() {
+    this.fetchUserProfileInfo();
+  },
+  methods: {
+    async fetchUserProfileInfo() {
+      try {
+        const userProfileRef = doc(db, 'userProfiles', this.userId);
+        const userProfileSnapshot = await getDocs(userProfileRef);
+        if (userProfileSnapshot.exists()) {
+          this.profileData = userProfileSnapshot.data();
+        } else {
+          console.error("No such profile!");
+        }
+      } catch (error) {
+        console.error("Error fetching profile: ", error);
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
 .user-profile-info {
@@ -66,7 +132,7 @@
     width: 100%;
   }
 }
-.img {
+.profile-pic {
   aspect-ratio: 1.32;
   object-fit: contain;
   object-position: center;
@@ -150,19 +216,5 @@
 }
 </style>
 
-<script>
-export default {
-  name: "UserProfileInfo",
-  props: {
-    userName: {
-      type: String,
-      required: true
-    },
-    userBio: {
-      type: String,
-      default: 'This user has no biography.'
-    }
-  }
-};
-</script>
+
 

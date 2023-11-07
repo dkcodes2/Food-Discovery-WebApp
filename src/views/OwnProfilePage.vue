@@ -150,21 +150,16 @@
 
 <script>
 import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
-import UserProfileStats from "@/components/profile-page-components/UserProfileStats.vue";
 import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
-//import FoodListsContainer from "@/components/profile-page-components/FoodListsContainer.vue";
-import FollowButton from "@/components/profile-page-components/FollowButton.vue";
 import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
 import EditPostsButton from "../components/profile-page-components/EditPostsButton.vue";
-//import TabSelector from "@/components/profile-page-components/TabSelector.vue";
+
 
 export default {
     name: "OwnProfilePage",
     components: {
     UserProfileInfo,
-    UserProfileStats,
     PostsContainer,
-    FollowButton,
     ShareProfileButton,
     EditPostsButton,
 },
