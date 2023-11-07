@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    
+    <!--drigmo2.com/publicPost/123456.html? 
+        unique post ID page created from AddPost, distributed to every page with Posts on it.-->
+
+    <div class="Header">
+        <a href="username URL">User-name's</a> Post!!
+        <!-- style this as a button?-->
+    </div>
+
+    <div class="caption">
+        <!-- put caption here -->
+
+        <!-- put cuisineTag here-->
+        <!-- put priceTag here-->
+    </div>
+
+    <div class="description">
+        <!-- put PostItem.description here -->
+    </div>
+
+    <div class="picture container">
+        <img src="picture URL" alt="PostItem picture!!">
+        <!-- put all PostItem.picture here -->
+    </div>
+
+    <!-- button to share post (creates a sharing URL) -->
+
+    <script>
+
+        
+        async function fetchCaption(){
+            alert("Fetching user captions...")
+            let caption = await db.collection("class_demo").get()
+            value.forEach(
+                (d) => {
+                    console.log(d.data())
+                }
+            )
+        }
+
+        async function displayPost(){
+            let allComponents = await db.collection("DOCUMENT NAME").get()
+
+            allComponents.forEach(
+                (docs) => {
+
+                    let theseComponents = docs.data()
+                    
+                    let caption = (theseComponents.caption)
+                    let description = (theseComponents.caption)
+                    let image = (theseComponents.image)
+
+                   
+
+
+                }
+
+            )
+        }
+    </script>
+    
+    
+    
+</body>
+</html>
