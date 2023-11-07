@@ -1,7 +1,8 @@
 <!-- FollowingPage.vue -->
 <template>
-    <div>
+    <div style = "text-align: center;">
         <navBar />
+        <br>
         <userQueryDisplay :searchText = searchString />
     </div>
 
