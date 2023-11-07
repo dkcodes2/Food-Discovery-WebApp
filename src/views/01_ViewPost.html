@@ -38,33 +38,43 @@
 
     <script>
 
-        
-        async function fetchCaption(){
-            alert("Fetching user captions...")
-            let caption = await db.collection("class_demo").get()
-            value.forEach(
-                (d) => {
-                    console.log(d.data())
-                }
-            )
-        }
+import firebase from "firebase/compat/app";
+             // Required for side-effects
+             import "firebase/firestore";
+             import { initializeApp } from "firebase/app";
+             import { getFirestore } from "firebase/firestore";
+             import {doc, getDoc} from "firebase/firestore";
+             // TODO: Replace the following with your app's Firebase project configuration
+             // See: https://support.google.com/firebase/answer/7015592
+             // Import the functions you need from the SDKs you need
+                     // TODO: Add SDKs for Firebase products that you want to use
+                     // https://firebase.google.com/docs/web/setup#available-libraries
+     
+                     // Your web app's Firebase configuration
+                         const firebaseConfig = {
+                         apiKey: "AIzaSyBLXqYLxSVAK-4Z91y4q_h7l_mPACP9Y8w",
+                         authDomain: "testproject-bea88.firebaseapp.com",
+                         projectId: "testproject-bea88",
+                         storageBucket: "testproject-bea88.appspot.com",
+                         messagingSenderId: "961480646708",
+                         appId: "1:961480646708:web:b22d1318985a35abd16a61"
+                         };
+     
+             // Initialize Firebase
+             firebase.initializeApp(firebaseConfig);
+     
+             //access firestore database from firebase
+             const app = initializeApp(firebaseConfig);
 
-        async function displayPost(){
-            let allComponents = await db.collection("DOCUMENT NAME").get()
+            const docRef = doc()
 
-            allComponents.forEach(
-                (docs) => {
-
-                    let theseComponents = docs.data()
-                    
-                    let caption = (theseComponents.caption)
-                    let description = (theseComponents.caption)
-                    let image = (theseComponents.image)
-
-                   
-
-
-                }
+             async function readData(){
+                 let entry = await db.collection("testColl").get()
+                 entry.forEach(
+                     (d) => {
+                         document.getElementById("").innerHTML = entry;
+                     }
+                 )
 
             )
         }
