@@ -6,7 +6,6 @@
           <img
             :src="userImage"
             loading="lazy"
-            :srcset="userImageSrcSet"
             class="profile-pic"
             alt="Profile Picture"
           />
@@ -29,9 +28,9 @@
 </template>
 
 <script>
-import drigmo2 from "../../firebase.js"
-import {getFirestore} from "firebase/firestore"
-import {collection, query, where, getDocs, doc, deleteDoc} from "firebase/firestore"
+import { ref, watch, onMounted } from 'vue';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import drigmo2 from "../../firebase.js";
 
 const db = getFirestore(drigmo2);
 
@@ -42,58 +41,57 @@ export default {
       type: String,
       required: true
     },
-    userName: {
-      type: String,
-      default: 'Username',
-      required: true
-    },
-    userBio: {
-      type: String,
-      default: 'This user has no biography.'
-    },
-    userImage: {
-      type: String,
-      required: true
-    },
-    userImageSrcSet: {
-      type: String,
-      default: ''
-    },
-    userPosts: {
-      type: [String, Number],
-      default: '0'
-    },
-    userFollowing: {
-      type: [String, Number],
-      default: '0'
-    }
   },
   data() {
     return {
-      profileData: null,
-      userId: ''
+      userName: '',
+      userImage: '',
+      userBio: '',
+      userPosts: 0,
+      userFollowing: 0,
     };
   },
-  created() {
-    this.fetchUserProfileInfo();
-  },
   methods: {
-    async fetchUserProfileInfo() {
+    async fetchUserData() {
       try {
-        const userProfileRef = doc(db, 'userProfiles', this.userId);
-        const userProfileSnapshot = await getDocs(userProfileRef);
-        if (userProfileSnapshot.exists()) {
-          this.profileData = userProfileSnapshot.data();
+        // const userRef = doc(db, "Users", this.uid);
+        //const userRef = doc(db, "Users");
+        // let q = query(collection(db, "Users"), where('username', '>=', stxt), where("username", "<", stxt + "\uf8ff"))
+        const docID = "CS06gepGgze9cpFwg4Ay"
+        const docRef = doc(db, "Users", docID);
+        let docSnap = await getDoc(docRef)
+        console.log(docSnap.exists())
+
+        // const docSnap = await getDoc(userRef);
+
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          this.userName = userData.username;
+          this.userImage = userData.userImage;
+          this.userBio = userData.userBio;
+          this.userPosts = userData.postsCount;
+          this.userFollowing = userData.followingCount;
         } else {
-          console.error("No such profile!");
+          console.log("No such profile!");
         }
       } catch (error) {
-        console.error("Error fetching profile: ", error);
+        console.error("Error fetching user data:", error);
       }
-    }
-  }
-}
+    },
+  },
+  watch: {
+    uid(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.fetchUserData();
+      }
+    },
+  },
+  mounted() {
+    this.fetchUserData();
+  },
+};
 </script>
+
 
 <style scoped>
 .user-profile-info {
