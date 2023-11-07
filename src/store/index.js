@@ -7,31 +7,30 @@ const db = getFirestore(firebaseApp);
 
 export default createStore({
     state: {
-        postArray: [], // Renamed from listingArray to postArray
-        postLoaded: null, // Renamed from listingLoaded to postLoaded
+        postArray: [], 
+        postLoaded: null, 
     },
     getters: {
-        postsData(state) { // Renamed from listingsData to postsData
+        postsData(state) { 
             return state.postArray;
         }
     },
     mutations: {},
     actions: {
-        async getPosts({ state }) { // Renamed from getListings to getPosts
-            const collectionRef = collection(db, "Posts"); // Changed from Listings to Posts
+        async getPosts({ state }) { 
+            const collectionRef = collection(db, "Posts"); 
             onSnapshot(collectionRef, (snap) => {
                 snap.forEach((doc) => {
                     const dataRef = doc.data();
-                    dataRef.PostID = doc.id; // Renamed from ListingID to PostID
-                    const index = state.postArray.findIndex(post => post.PostID === doc.id); // Changed from listingArray to postArray
+                    dataRef.PostID = doc.id; 
+                    const index = state.postArray.findIndex(post => post.PostID === doc.id); 
                     if (index === -1) {
-                        state.postArray.push(dataRef); // Changed from listingArray to postArray
-                    } else {
-                        state.postArray[index] = dataRef; // Changed from listingArray to postArray
+                        state.postArray.push(dataRef); 
+                        state.postArray[index] = dataRef; 
                     }
                 });
             });
-            state.postLoaded = true; // Renamed from listingLoaded to postLoaded
+            state.postLoaded = true; 
         }
     }
 });
