@@ -3,6 +3,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth"
 
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
+import CreatePost from '@/views/CreatePostPage.vue';
 
 const auth = getAuth();
 
@@ -17,6 +18,13 @@ const routes = [
     name: "SignUpPage",
     component: SignUpPage,
   },
+
+  {
+    path: '/createPost',
+    name: 'CreatePost',
+    component: CreatePost,
+  },
+
 ];
 
 
@@ -25,14 +33,14 @@ const router = createRouter({
   routes,
 });
 
-/*let isAuthenticated = false;
+let isAuthenticated = false;
 
 const authPromise = new Promise((resolve) => {
   onAuthStateChanged(auth, (user) => {
     isAuthenticated = !!user;
     resolve();
   });
-});*/
+});
 
 
 export default router;
