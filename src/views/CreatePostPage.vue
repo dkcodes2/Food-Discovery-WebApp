@@ -8,7 +8,7 @@
 import CreatePost from '../components/CreatePost.vue'
 
 export default {
-    name: "CreatePost",
+    name: "CreatePostPage",
     components: {
         CreatePost
     }

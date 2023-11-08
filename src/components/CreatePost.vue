@@ -123,13 +123,14 @@ export default {
                 alert("Upload Image!")
             } else {
                 try {
+
                    
                     const docRef = doc(collection(db, "Posts"));
                     console.log(docRef.id)
                     const url = await this.uploadToCloud(docRef.id)
                     
                     await setDoc(docRef, { 
-                        SellerID: this.uid,
+                        UserID: this.uid,
                         Title: this.posttitle,
                         Address: this.address,
                         GenreOfFood: this.genreoffood,
@@ -173,6 +174,7 @@ export default {
 }
 
 </script>
+
 
 
 <style>
