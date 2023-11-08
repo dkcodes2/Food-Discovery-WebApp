@@ -6,14 +6,10 @@
           <img
             :src="userImage"
             loading="lazy"
-<<<<<<< HEAD
-=======
-            :srcset="userImageSrcSet"
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
             class="profile-pic"
             alt="Profile Picture"
           />
-          <div class="name">{{ userName }}</div>
+          <div class="name">{{ username }}</div>
         </div>
         <div class="column-2">
           <div class="posts">Posts</div>
@@ -26,70 +22,54 @@
       </div>
     </div>
     <div class="biography">
-      {{ userBio}}
+      {{ userBio }}
     </div>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-import { ref, watch, onMounted } from 'vue';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import drigmo2 from "../../firebase.js";
-=======
-import drigmo2 from "../../firebase.js"
-import {getFirestore} from "firebase/firestore"
-import {collection, query, where, getDocs, doc, deleteDoc} from "firebase/firestore"
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
+import {getFirestore} from "firebase/firestore";
+import {collection, query, where, getDoc, doc, deleteDoc} from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const db = getFirestore(drigmo2);
 
 export default {
   name: "UserProfileInfo",
-  props: {
-    uid: {
-<<<<<<< HEAD
-=======
-      type: String,
-      required: true
-    },
-    userName: {
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
-      type: String,
-      default: 'Username',
-      required: true
-    },
-<<<<<<< HEAD
-  },
   data() {
     return {
-      userName: '',
-      userImage: '',
-      userBio: '',
+      useremail:'',
+      username: 'nameless',
+      userImage: 'profile picture',
+      userBio: 'this user has no bio yet',
       userPosts: 0,
       userFollowing: 0,
-    };
+    }
   },
+
+  async mounted(){
+        const auth = getAuth();
+        this.uid = auth.currentUser.useremail;
+        await this.fetchUserData(this.uid);
+    },
+
   methods: {
-    async fetchUserData() {
+    async fetchUserData(uid) {
       try {
-        // const userRef = doc(db, "Users", this.uid);
-        //const userRef = doc(db, "Users");
-        // let q = query(collection(db, "Users"), where('username', '>=', stxt), where("username", "<", stxt + "\uf8ff"))
-        const docID = "CS06gepGgze9cpFwg4Ay"
-        const docRef = doc(db, "Users", docID);
-        let docSnap = await getDoc(docRef)
-        console.log(docSnap.exists())
 
-        // const docSnap = await getDoc(userRef);
-
+        //const docID = "CS06gepGgze9cpFwg4Ay";
+        const docRef = doc(db, "usernames", this.uid);
+        let docSnap = await getDoc(docRef);
+        console.log(docSnap);
         if (docSnap.exists()) {
-          const userData = docSnap.data();
-          this.userName = userData.username;
-          this.userImage = userData.userImage;
-          this.userBio = userData.userBio;
-          this.userPosts = userData.postsCount;
-          this.userFollowing = userData.followingCount;
+          let userData = docSnap.data();
+          this.uid = userData.uid;
+          let username = userData.username;
+          let userImage = userData.userImage;
+          let userBio = userData.userBio;
+          let userPosts = userData.userPosts;
+          let userFollowing = userData.userFollowing;
         } else {
           console.log("No such profile!");
         }
@@ -98,70 +78,19 @@ export default {
       }
     },
   },
-  watch: {
-    uid(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        this.fetchUserData();
-      }
-    },
-  },
-  mounted() {
-    this.fetchUserData();
-  },
+watch: {
+  // Whenever docID changes, this function will run
+  docID(newVal, oldVal) {
+    if (newVal !== oldVal && newVal) {
+      this.fetchUserData();
+    }
+  }
+},
+
 };
 </script>
 
 
-=======
-    userBio: {
-      type: String,
-      default: 'This user has no biography.'
-    },
-    userImage: {
-      type: String,
-      required: true
-    },
-    userImageSrcSet: {
-      type: String,
-      default: ''
-    },
-    userPosts: {
-      type: [String, Number],
-      default: '0'
-    },
-    userFollowing: {
-      type: [String, Number],
-      default: '0'
-    }
-  },
-  data() {
-    return {
-      profileData: null,
-      userId: ''
-    };
-  },
-  created() {
-    this.fetchUserProfileInfo();
-  },
-  methods: {
-    async fetchUserProfileInfo() {
-      try {
-        const userProfileRef = doc(db, 'userProfiles', this.userId);
-        const userProfileSnapshot = await getDocs(userProfileRef);
-        if (userProfileSnapshot.exists()) {
-          this.profileData = userProfileSnapshot.data();
-        } else {
-          console.error("No such profile!");
-        }
-      } catch (error) {
-        console.error("Error fetching profile: ", error);
-      }
-    }
-  }
-}
-</script>
-
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
 <style scoped>
 .user-profile-info {
   display: flex;
@@ -223,7 +152,6 @@ export default {
 @media (max-width: 991px) {
   .column-2 {
     width: 100%;
-<<<<<<< HEAD
   }
 }
 .posts {
@@ -258,42 +186,6 @@ export default {
     width: 100%;
   }
 }
-=======
-  }
-}
-.posts {
-  color: rgba(0, 0, 0, 0.97);
-  text-align: center;
-  align-self: stretch;
-  font: 700 30px Inter, sans-serif;
-}
-.no-of-posts {
-  color: rgba(0, 0, 0, 0.97);
-  text-align: center;
-  align-self: center;
-  margin-top: 41px;
-  white-space: nowrap;
-  font: 300 30px Inter, sans-serif;
-}
-@media (max-width: 991px) {
-  .no-of-posts {
-    margin-top: 40px;
-    white-space: initial;
-  }
-}
-.column-3 {
-  display: flex;
-  flex-direction: column;
-  line-height: normal;
-  width: 29%;
-  margin-left: 20px;
-}
-@media (max-width: 991px) {
-  .column-3 {
-    width: 100%;
-  }
-}
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
 .div-2 {
   color: rgba(0, 0, 0, 0.97);
   text-align: center;
@@ -318,11 +210,7 @@ export default {
     max-width: 100%;
   }
 }
-<<<<<<< HEAD
 </style>
 
 
 
-=======
-</style>
->>>>>>> dbccb2754b885711c224003f679f0262d170981d

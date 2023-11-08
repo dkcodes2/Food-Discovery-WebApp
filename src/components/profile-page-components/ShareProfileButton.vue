@@ -33,8 +33,4 @@ export default {
   .share-profile-button:hover {
       transform: scale(1.1);
   }
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> dbccb2754b885711c224003f679f0262d170981d

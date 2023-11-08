@@ -1,30 +1,15 @@
 <template>
-<<<<<<< HEAD
-    <div class="profile-page">
-      <div class="header">
-        <div class="user-profile-info">
-      <!-- Pass uid prop to UserProfileInfo -->
-            <UserProfileInfo :uid="viewedUser.uid" />
-=======
+  <div>
   <NavBar style = "align-items: center;"/>
     <div class="profile-page">
       <div class="header">
         <div class="user-profile-info">
-          <UserProfileInfo />
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
+          <UserProfileInfo :doc-id="docID" />
         </div>
         <div class="buttons">
           <div class="div">
             <div class="column-4">
-<<<<<<< HEAD
-                <EditPostsButton />
-=======
-
-                <EditPostsButton />
-
-
-                
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
+                <DeletePostsButton />
               <!--  Tab icon optional to keep
                 <img
                 loading="lazy"
@@ -42,42 +27,30 @@
        <PostsContainer />
       </div>
     </div>
+  </div>
 </template>
+
   
 <script>
 import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
 import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
 import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
-import EditPostsButton from "../components/profile-page-components/EditPostsButton.vue";
-<<<<<<< HEAD
-
-=======
+import DeletePostsButton from "../components/profile-page-components/DeletePostsButton.vue";
 import NavBar from "../components/NavBar.vue"
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
 
 export default {
     name: "OwnProfilePage",
     components: {
-<<<<<<< HEAD
-    UserProfileInfo,
-    PostsContainer,
-    ShareProfileButton,
-    EditPostsButton,
-},
-=======
       NavBar,
       UserProfileInfo,
       PostsContainer,
       ShareProfileButton,
-      EditPostsButton,
+      DeletePostsButton,
     },
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
     data() {
         return {
-            viewedUser: {
-                uid: '123',
-             }, // The UID of the user whose profile to be viewed,  // the data of the user being viewed
-            userPosts: []    // the posts of the user being viewed
+          docID: this.$route.params.docID || 'EMAILTEST@EMAIL.COM',
+
         };
     },
     // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
@@ -155,8 +128,6 @@ margin: 23px -20px 0 0;
     width: 100%;
   }
 }
-<<<<<<< HEAD
-=======
 
 .column-5 {
   display: flex;
@@ -199,7 +170,6 @@ margin: 23px -20px 0 0;
     max-width: 100%;
   }
 }
->>>>>>> dbccb2754b885711c224003f679f0262d170981d
 
 .column-5 {
   display: flex;
@@ -214,36 +184,4 @@ margin: 23px -20px 0 0;
   }
 }
 
-<<<<<<< HEAD
-.div-4 {
-  display: flex;
-  flex-direction: column;
-  fill: rgba(157, 157, 157, 0.33);
-  overflow: hidden;
-  align-self: start;
-  position: relative;
-  display: flex;
-  min-height: 1272px;
-  margin-top: 10px;
-  width: 100%;
-  padding: 11px 70px 386px 65px;
-}
-@media (max-width: 991px) {
-  .div-4 {
-    max-width: 100%;
-    padding: 0 20px 100px;
-  }
-}
-.div-5 {
-  position: relative;
-  align-self: stretch;
-}
-@media (max-width: 991px) {
-  .div-5 {
-    max-width: 100%;
-  }
-}
 </style>
-=======
-</style>
->>>>>>> dbccb2754b885711c224003f679f0262d170981d

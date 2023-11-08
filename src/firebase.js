@@ -11,7 +11,6 @@ const firebaseConfig = {
   appId: "1:56142698014:web:57e408a5a61e960037c00f",
 };
 
-
 const drigmo2 = initializeApp(firebaseConfig);
 export default drigmo2;
 
