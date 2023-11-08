@@ -81,7 +81,7 @@
                     await setDoc(doc(db, 'usernames', this.name), { uid: user.uid });
 
                     alert('Successfully registered!');
-                    this.$router.push({ name: 'EditProfile' });
+                    this.$router.push({ name: 'LogInPage' });
                 } catch (error) {
                     alert(error.message);
                 }
