@@ -5,41 +5,71 @@
 </template>
 
 <script>
+import drigmo2 from "../../firebase.js";
+import {getFirestore} from "firebase/firestore";
+import {collection, query, where, getDoc, doc, deleteDoc} from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { updateDoc, FieldValue } from 'firebase/firestore';
+
+const db = getFirestore(drigmo2);
+
 export default {
   name: 'FollowButton',
+  props: {
+    currentUserID: String,
+    otherProfileUserID: String,
+  },
   data() {
     return {
-      isFollowing: false  // Example state (can be fetched from backend)
+      isFollowing: false, // This should be fetched from Firebase to check the initial follow status
     }
   },
   methods: {
-    toggleFollow() {
+    async toggleFollow() {
       this.isFollowing = !this.isFollowing;
-      // Add logic to communicate with the backend here
-    }
-  }
+      this.$emit('update-follow', this.isFollowing); // Emit an event for the parent component
+
+      // Create references to the current user and the profile user documents
+      const currentUserRef = doc(db, 'Users', this.currentUserID);
+      const otherProfileUserRef = doc(db, 'Users', this.otherProfileUserID);
+
+      try {
+        // Update the 'following' count in the profile user's document
+        await updateDoc(profileUserRef, {
+          userFollowing: FieldValue.increment(this.isFollowing ? 1 : -1)
+        });
+      } catch (error) {
+        console.error('Error updating follow status:', error);
+      }
+    },
+  },
 }
 </script>
 
 <style scoped>
 button {
-/* Basic styling */
-padding: 10px 20px;
-border: none;
-cursor: pointer;
-
-/* Stretch to fill the container */
-display: block;
-width: 100%; /* Makes the button fill the width of its parent */
-
-/* Styling for the 'following' state */
-background-color: aqua; /* Dark background when following */
-color: black;
+  /* Basic styling */
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background-color: #e7f3ff; /* Light blue background by default */
+  color: #0056b3; /* Darker blue text by default */
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transitions */
 }
 
+/* Styles to apply when the button has the 'following' class */
 button.following {
-/* Perhaps a different background color to indicate 'following' state */
-background-color: blue; /* Change as needed */
-color: white;
+  background-color: #007bff; /* Bright blue background to indicate following */
+  color: white; /* White text for contrast */
+  border-color: #007bff; /* Bright blue border to match the background */
+}
+
+/* Optionally, add a hover effect */
+button:hover {
+  background-color: #d0e7ff; /* A lighter blue on hover for the 'not following' state */
+}
+
+button.following:hover {
+  background-color: #0069d9; /* A darker blue when following and hovered */
 }
 </style>
