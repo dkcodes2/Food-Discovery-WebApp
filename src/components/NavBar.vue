@@ -47,85 +47,153 @@ export default {
 </script>
 
 <style scoped>
+/* Main Container Styles */
 #main {
-    font-family: Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    margin-bottom: 20px; /* Space below navbar */
+}
+
+/* Navigation Styles */
+#nav {
+    display: flex;
+    align-items: center;
 }
 
 #nav-search {
-    margin-left: 50px;
-    display: inline-block;
-}
-
-#nav {
-    padding: 30px;
-    text-align: center;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    margin-left: 50px; /* Adjust as needed */
 }
 
 #post {
-    display: inline-block;
+    display: flex;
+    align-items: center;
 }
 
-/* #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-    padding: 10px;
-} */
-
-.routerlink{
+.routerlink {
     font-weight: bold;
     color: #2c3e50;
     padding: 10px;
     text-decoration: none;
 }
 
-.routerlink:hover{
-    /* background-color:dodgerblue; */
-    color:dodgerblue;
+.routerlink:hover {
+    color: dodgerblue;
 }
 
-.routerlink:active{
-    color:darkblue;
-}
-
-/* #nav a.router-link-exact-active {
-    color: #42b983;
-} */
-.btn {
-    min-width:70px;
-    padding: 5px;
-    background-color: dodgerblue;
-    border: none;
-}
-
-.btn:hover {
-    background:deepskyblue;
-}
-
-.btn:active {
-    background: deepskyblue;
-    color: white;
-}
 .logout-button {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    background: none; /* or 'transparent' if you want it to be completely see-through */
+    background: none;
     border: none;
     color: #2c3e50;
     padding: 10px;
-    font-size: 17px;
-    cursor: pointer; /* To show it's clickable */
+    cursor: pointer;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .logout-button:hover {
-    color:rgb(0, 136, 255);
-    background: none
+    color: rgb(0, 136, 255);
 }
 
-.logout-button:active {
-    background: deepskyblue;
+/* Button Styles */
+.btn {
+    min-width: 70px;
+    padding: 5px;
+    background-color: dodgerblue;
+    border: none;
+    cursor: pointer;
     color: white;
+    border-radius: 5px; /* Rounded corners */
 }
+
+.btn:hover {
+    background-color: deepskyblue;
+}
+
+/* Input field styles, similar to the login page example you provided */
+input[type="text"], input[type="email"], input[type="password"], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Rounded corners */
+    box-sizing: border-box;
+}
+
+input[type="text"]::placeholder {
+    text-align: center;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    outline: 3px solid rgba(43, 41, 41, 0.933);
+}
+
+/* Post Creation Form Styles */
+#postcreate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Limit the width of the form */
+    margin: auto; /* Center the form in the page */
+}
+
+#postheader {
+    text-align: center;
+    background-color: #e3e3e3;
+    width: 100%;
+    padding: 20px 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#postheader h2 {
+    font-size: 24px; /* Adjust font-size as needed */
+    font-weight: bold;
+    color: #333;
+}
+
+#leftcontainer, #rightcontainer {
+    width: 100%;
+}
+
+#postphoto {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/* Button styling to match the login page example */
+#buttonsupdate button, label[for="uploadbutton"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Rounded corners */
+    background-color: #60cbb8;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#buttonsupdate button:hover, label[for="uploadbutton"]:hover {
+    background-color: #14a88d;
+}
+
+/* Additional styling for other elements as needed */
+/* ... */
+
 
 </style>
