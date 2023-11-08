@@ -37,6 +37,7 @@
                                 <option value="Western">Western</option>
                                 <option value="Korean">Korean</option>
                                 <option value="Japanese">Japanese</option>
+                                <option value="Others">Others</option>
                             </select>
                         </div>
 
