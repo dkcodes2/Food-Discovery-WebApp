@@ -171,5 +171,9 @@ export default {
     },
     // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
 }
+<<<<<<< HEAD
 </script>
 
+=======
+</script>
+>>>>>>> dbccb2754b885711c224003f679f0262d170981d

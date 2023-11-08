@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/home-page-component/NavBar.vue';
+import NavBar from '@/components/NavBar.vue';
 import CuisineDiscoveryFeed from '@/components/home-page-component/CuisineDiscoveryFeed.vue';
 import CuisineBar from '@/components/home-page-component/CuisineBar.vue';
 
