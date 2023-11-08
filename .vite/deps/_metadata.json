@@ -1,0 +1,25 @@
+{
+  "hash": "a3f35fe9",
+  "browserHash": "59d6c91c",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "e6c4f9c8",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../../../../../../../../../node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "63b76689",
+      "needsInterop": false
+    },
+    "firebase/auth": {
+      "src": "../../node_modules/firebase/auth/dist/esm/index.esm.js",
+      "file": "firebase_auth.js",
+      "fileHash": "3a600571",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}

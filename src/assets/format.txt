@@ -1,0 +1,33 @@
+DOCUMENTATION FOR DOCUMENTS IN FIREBASE
+
+Collection: Users
+    Documuent ID: username / email. 
+    Fields as follows:
+        {
+            Username: ,
+            User_Description: ,
+            Following: [], // list of user's following_id
+            Followers: [], // list of user's follower_id
+            Posts: [], // list of user's posts_id
+            Food_Lists [], // list of user's food_list_id
+        }
+
+Collection: Posts
+    Documuent ID: post_id
+    Fields as follows:
+        {
+            Title: ,
+            Address: ,
+            Genre: ,
+            Title: ,
+            Description: ,
+        }
+
+
+Collection: Food List
+    Documuent ID: Auto-generated 
+    Fields as follows:
+        {
+            Food_List_Name: ,
+            Food_List_Posts: [], // list of user's food list's post ids.
+        }

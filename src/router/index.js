@@ -5,10 +5,24 @@ import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
 import CreatePost from '@/views/CreatePostPage.vue';
 
+import HomePage from '@/views/HomePage.vue';
+import Japanese from '@/views/Japanese.vue';
+import Korean from '@/views/Korean.vue';
+import Western from '@/views/Western.vue';
+import Local from '@/views/Local.vue';
+import Others from '@/views/Others.vue';
+
+import userQueryDisplayPage from '@/views/userQueryDisplayPage.vue';
+
+import OwnProfilePage from '@/views/OwnProfilePage.vue'; 
+import OthersProfilePage from '@/views/OthersProfilePage.vue';
+import FollowingPage from '@/views/FollowingPage.vue';
+
+
 const auth = getAuth();
 
 const routes = [
-  {
+    {
     path: "/",
     name: "LogInPage",
     component: LogInPage,
@@ -19,14 +33,67 @@ const routes = [
     component: SignUpPage,
   },
 
+
   {
     path: '/createPost',
     name: 'CreatePost',
     component: CreatePost,
   },
 
-];
+  {
+    path: "/homepage",
+    name: "HomePage",
+    component: HomePage,
+  },
+  { 
+      path: '/Japanese', 
+      name: 'Japanese', 
+      component: Japanese 
+  },
+  { 
+      path: '/Korean', 
+      name: 'Korean', 
+      component: Korean
+  },
+  {
+      path: '/Western',
+      name: 'Western',
+      component: Western
+  },
+  {
+      path: '/Local',
+      name: 'Local',
+      component: Local
+  },
+  {
+      path: '/Others',
+      name: 'Others',
+      component: Others
+  },
+  {
+    path: "/userquerydisplay",
+    name: "UserQueryDisplayPage",
+    component: userQueryDisplayPage,
 
+
+    props: route => ({searchString: route.query.q})
+  },
+  {
+    path: "/ownprofilepage",
+    name: "OwnProfilePage",
+    component: OwnProfilePage,
+  },
+  {
+    path: "/othersprofilepage",
+    name: "OthersProfilePage",
+    component: OthersProfilePage,
+  },
+  {
+    path: "/followingpage",
+    name: "FollowingPage",
+    component: FollowingPage,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),

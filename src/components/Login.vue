@@ -6,7 +6,7 @@
     
     <div id="formContainer"> 
       <div id="headerText">  
-        <h1>Sign In</h1>
+        <h1>Log In</h1>
       </div>
       
       <form id="logInForm" @submit.prevent="login"> 
@@ -63,13 +63,17 @@ export default {
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     alert('Successfully logged in');
-                    this.$router.push({name: 'CreatePost'}); //route name to be changed based on router
+
+
+
+                    this.$router.push({name: 'HomePage'}); //route name to be changed based on router
+
                 })
                 .catch(error => {
                     alert(error.message);
                 });
         },
-
+    
           // To direct users to the Sign Up page if they have not yet created an account
         goToSignUp() {
             this.$router.push({name: 'SignUpPage'})

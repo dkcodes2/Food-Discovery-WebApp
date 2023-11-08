@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import SignUp from '../components/SignUp.vue'
+    import SignUp from '@/components/Signup.vue'
 
     export default {
         name: "SignUpPage",
