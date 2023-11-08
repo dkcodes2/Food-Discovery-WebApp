@@ -54,7 +54,7 @@
                         <textarea id="caption" v-model="caption" placeholder="Enter a description of the restaurant" required></textarea>
 
                         <div id="buttonsupdate">
-                            <button id="cancelbutton" type="button">Cancel</button>
+                            <button id="cancelbutton" type="button" @click="goToHomePage">Cancel</button>
                             <button id="savebutton" type="submit">Post</button>
                         </div>
                     </div>
@@ -142,7 +142,7 @@ export default {
                     }, {merge: true})
                     console.log("LOL", url)
                     alert("Post created!")
-                    this.$router.push({name: "ProfilePosts"})
+                    this.$router.push({name: "HomePage"})
                 } catch(error) {
                     alert("Error creating post: ", error)
                 }
@@ -169,7 +169,11 @@ export default {
             console.log("inside")
             
             return url
-        }
+        },
+
+        goToHomePage() {
+        this.$router.push({name: 'HomePage'}); // Assuming the homepage route is '/
+        },
     }
 }
 
