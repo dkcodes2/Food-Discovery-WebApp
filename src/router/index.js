@@ -3,7 +3,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth"
 
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
-import CreatePost from '@/views/CreatePostPage.vue';
+import CreatePostPage from '@/views/CreatePostPage.vue';
 
 import HomePage from '@/views/HomePage.vue';
 import Japanese from '@/views/Japanese.vue';
