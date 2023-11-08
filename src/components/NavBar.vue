@@ -29,7 +29,7 @@ export default {
            this.searchInput = ""
         },
         routeToPost() {
-            this.$router.push({ path:'/homepage'} ) // to change to route to createpostpage
+            this.$router.push({ name: 'CreatePostPage'} ) // to change to route to createpostpage
         },
         logout() {
             const auth = getAuth();
