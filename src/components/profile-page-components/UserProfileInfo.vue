@@ -9,7 +9,8 @@
             class="profile-pic"
             alt="Profile Picture"
           />
-          <div class="name">{{ username }}</div>
+          <!-- <div class="name">{{ username }}</div> -->
+          <p>Welcome, {{ username }}!</p>
         </div>
         <div class="column-2">
           <div class="posts">Posts</div>
@@ -39,53 +40,79 @@ export default {
   name: "UserProfileInfo",
   data() {
     return {
-      useremail:'',
-      username: 'nameless',
-      userImage: 'profile picture',
-      userBio: 'this user has no bio yet',
-      userPosts: 0,
-      userFollowing: 0,
+      username: '',
+      userId: '',
+      // useremail:'',
+      // username: 'nameless',
+      // userImage: 'profile picture',
+      // userBio: 'this user has no bio yet',
+      // userPosts: 0,
+      // userFollowing: 0,
     }
   },
-
-  async mounted(){
+  async created() {
         const auth = getAuth();
-        this.uid = auth.currentUser.useremail;
-        await this.fetchUserData(this.uid);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, so fetch the username
+                this.userId = user.uid;
+                this.fetchUsername(this.userId);
+            } else {
+                // No user is signed in
+                this.username = "Guest";
+            }
+        });
     },
+  
+  
 
   methods: {
-    async fetchUserData(uid) {
-      try {
+    async fetchUsername() {
+            const usernameDocRef = doc(db, "usernames", this.uid);
+            const usernameDoc = await getDoc(usernameDocRef);
 
-        //const docID = "CS06gepGgze9cpFwg4Ay";
-        const docRef = doc(db, "usernames", this.uid);
-        let docSnap = await getDoc(docRef);
-        console.log(docSnap);
-        if (docSnap.exists()) {
-          let userData = docSnap.data();
-          this.uid = userData.uid;
-          let username = userData.username;
-          let userImage = userData.userImage;
-          let userBio = userData.userBio;
-          let userPosts = userData.userPosts;
-          let userFollowing = userData.userFollowing;
-        } else {
-          console.log("No such profile!");
+            if (usernameDoc.exists()) {
+                const usernameData = usernameDoc.data();
+                // Assuming the username is stored under a field called 'username'
+                this.username = usernameData.username;
+            } else {
+                console.error("No such document!");
+            }
         }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
     },
-  },
-watch: {
-  // Whenever docID changes, this function will run
-  docID(newVal, oldVal) {
-    if (newVal !== oldVal && newVal) {
-      this.fetchUserData();
-    }
-  }
-},
+
+    
+//     async fetchUserData(uid) {
+//       try {
+
+//         //const docID = "CS06gepGgze9cpFwg4Ay";
+//         const docRef = doc(db, "usernames", this.uid);
+//         let docSnap = await getDoc(docRef);
+//         console.log(docSnap);
+//         if (docSnap.exists()) {
+//           let userData = docSnap.data();
+//           this.uid = userData.uid;
+//           let username = userData.username;
+//           let userImage = userData.userImage;
+//           let userBio = userData.userBio;
+//           let userPosts = userData.userPosts;
+//           let userFollowing = userData.userFollowing;
+//         } else {
+//           console.log("No such profile!");
+//         }
+//       } catch (error) {
+//         console.error("Error fetching user data:", error);
+//       }
+//     },
+//   },
+// watch: {
+//   // Whenever docID changes, this function will run
+//   docID(newVal, oldVal) {
+//     if (newVal !== oldVal && newVal) {
+//       this.fetchUserData();
+//     }
+//   }
+// },
 
 };
 </script>

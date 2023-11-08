@@ -8,7 +8,7 @@
           <div class="div">
             <div class="column-4">
 
-                <EditPostsButton />
+                <FollowButton/>
 
 
                 
@@ -30,7 +30,32 @@
       </div>
     </div>
 </template>
-  
+
+<script>
+import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
+import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
+import FollowButton from "@/components/profile-page-components/FollowButton.vue";
+import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
+
+
+export default {
+    name: "OthersProfilePage",
+    components: {
+    UserProfileInfo,
+    PostsContainer,
+    FollowButton,
+    ShareProfileButton,
+},
+    data() {
+        return {
+            viewedUser: {},  // the data of the user being viewed
+            userPosts: []    // the posts of the user being viewed
+        };
+    },
+    // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
+}
+</script>
+
   
   
   <style scoped>
@@ -147,29 +172,4 @@
   
 
 </style>
-
-<script>
-import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
-import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
-import FollowButton from "@/components/profile-page-components/FollowButton.vue";
-import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
-
-
-export default {
-    name: "OwnProfilePage",
-    components: {
-    UserProfileInfo,
-    PostsContainer,
-    FollowButton,
-    ShareProfileButton,
-},
-    data() {
-        return {
-            viewedUser: {},  // the data of the user being viewed
-            userPosts: []    // the posts of the user being viewed
-        };
-    },
-    // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
-}
-</script>
 

@@ -1,10 +1,10 @@
 <template>
-    <div class="delete-posts-button">Edit Posts</div>
+    <div class="delete-posts-button">Delete Post(s)</div>
 </template>
    
  <script>
    export default {
-     name: 'EditPostsButton',
+     name: 'DeletePostsButton',
      data() {
        return {
          
