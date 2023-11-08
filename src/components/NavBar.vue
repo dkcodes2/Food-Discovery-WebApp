@@ -1,20 +1,9 @@
-<template>
-<<<<<<< HEAD
-  <div id = "nav">
-    <router-link to="HomePage" class="routerlink" style="margin-right: 1vw;"> Discover </router-link> |
-    <router-link to="OwnProfilePage" class="routerlink" style="margin-right: 1vw;"> Profile </router-link> |
-    <router-link to= "HomePage" class="routerlink"> Logout </router-link>     
-  </div>
-  
-  <div id="nav-search">
-    <input v-model = "searchInput" type="text" placeholder = "&#128269; search for friends">&nbsp;
-=======
-  
+<template>  
   <div id="main">
         <div id = "nav">
             <router-link to="HomePage" class="routerlink" style="margin-right: 1vw;"> Discover </router-link>
-            <router-link to="HomePage" class="routerlink" style="margin-right: 1vw;"> Profile </router-link>
-            <router-link to= "HomePage" class="routerlink"> Logout </router-link>     
+            <router-link to="OwnProfilePage" class="routerlink" style="margin-right: 1vw;"> Profile </router-link>
+            <button class="logout-button" @click="logout" > Logout </button>     
         </div>
         <div id="nav-search">
             <input v-model = "searchInput" type="text" placeholder = "&#128269; search for friends">&nbsp;
@@ -24,15 +13,10 @@
             <button class="btn" @click = "routeToPost"> Post </button>
         </div>
   </div>
-  
->>>>>>> 4a3d3f4f400275f99d2711d8d4d336dda1a36b12
-
-  <!-- <div id="nav" v-if="user && $route.name !== 'SignUpPage' && $route.name !== 'LogInPage' && $route.name !== 'PasswordRecoveryPage'"> -->
-
-    <!-- </div> -->
 </template>
 
 <script>
+import { getAuth, signOut } from "firebase/auth";
 export default {
     data() {
         return {
@@ -46,10 +30,20 @@ export default {
         },
         routeToPost() {
             this.$router.push({ path:'/homepage'} ) // to change to route to createpostpage
+        },
+        logout() {
+            const auth = getAuth();
+            signOut(auth).then(() => {
+                // Sign-out successful.
+                this.$router.push({ name: 'LogInPage' }); // Use the route name or path of your login page
+            }).catch((error) => {
+                // An error happened.
+                console.error("Logout failed", error);
+                alert("Failed to log out. Please try again.");
+            });
         }
     }
 }
-
 </script>
 
 <style scoped>
@@ -109,6 +103,27 @@ export default {
 }
 
 .btn:active {
+    background: deepskyblue;
+    color: white;
+}
+.logout-button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background: none; /* or 'transparent' if you want it to be completely see-through */
+    border: none;
+    color: #2c3e50;
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer; /* To show it's clickable */
+    text-decoration: none;
+}
+
+.logout-button:hover {
+    color:rgb(0, 136, 255);
+    background: none
+}
+
+.logout-button:active {
     background: deepskyblue;
     color: white;
 }
