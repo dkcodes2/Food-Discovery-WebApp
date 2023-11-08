@@ -37,11 +37,10 @@
  
  
 <script>
-    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-    import { doc, setDoc, getFirestore, getDoc } from "firebase/firestore"; 
+    import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged} from "firebase/auth";
 
     export default {
-        name: "SignUp",
+        name:"SignUp",
 
         data() {
             return {
@@ -51,50 +50,30 @@
             }
         },
         methods: {
-            async isUsernameUnique(username) {
-                const db = getFirestore();
-                const usernameRef = doc(db, 'usernames', username);
-                const docSnap = await getDoc(usernameRef);
-                return !docSnap.exists();
-            },
-            async register() {
+            register() {
                 const auth = getAuth();
-                try {
-                    // Check if username is unique
-                    const unique = await this.isUsernameUnique(this.name);
-                    if (!unique) {
-                        alert('Username is already taken. Please choose a different one.');
-                        return;
-                    }
-
-                    // If username is unique, create user
-                    const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
-                    const user = userCredential.user;
-                    
-                    // Update the user profile with the username
-                    await updateProfile(user, {
-                        displayName: this.name
-                    });
-
-                    // Store the username in Firestore with the UID as key
-                    const db = getFirestore();
-                    await setDoc(doc(db, 'usernames', this.name), { uid: user.uid });
-
-                    alert('Successfully registered!');
-                    this.$router.push({ name: 'EditProfile' });
-                } catch (error) {
-                    alert(error.message);
-                }
+                createUserWithEmailAndPassword(auth, this.email, this.password)
+                    .then((userCredential) => {
+                        const user = userCredential.user
+                        updateProfile(user, {
+                            displayName: this.name
+                        })
+                        alert('Successfully registered!')
+                        this.$router.push({name: 'LogInPage'})
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                    })
             },
             goToLogIn() {
-                this.$router.push({ name: 'LogInPage' });
+                this.$router.push({name: 'LogInPage'})
             }
-        }
+        },
+    
     }
 </script>
  
  
-/* Modified to match the login page styles */
 <style scoped>
 
 /* Main Container */

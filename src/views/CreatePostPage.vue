@@ -6,6 +6,7 @@
 
 <script>
 import CreatePost from '../components/CreatePost.vue'
+import NavBar from '@/components/NavBar.vue';
 
 export default {
     name: "CreatePostPage",
