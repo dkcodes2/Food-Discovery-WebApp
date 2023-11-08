@@ -36,8 +36,8 @@ const routes = [
 
   {
     path: '/createPost',
-    name: 'CreatePost',
-    component: CreatePost,
+    name: 'CreatePostPage',
+    component: CreatePostPage,
   },
 
   {
@@ -111,5 +111,3 @@ const authPromise = new Promise((resolve) => {
 
 
 export default router;
-
-
