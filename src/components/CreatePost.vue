@@ -184,7 +184,6 @@ body {
 }
 
 /* Header styling */
-
 #postheader {
     text-align: center;
     padding: 20px 0;
@@ -199,7 +198,6 @@ body {
 }
 
 /* Container styling */
-
 #container {
     display: flex;
     flex-direction: column;
@@ -213,7 +211,6 @@ body {
 }
 
 /* Left container styling */
-
 #leftcontainer {
     width: 40%;
     margin-right: 2vw;
@@ -227,80 +224,119 @@ body {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Image upload button styling */
-
-#buttonsupdate {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2vh;
-}
-
-label[for="uploadbutton"] {
-    padding: 10px 20px;
-    background-color: #359138;
-    border: 1px solid #1c0808;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
-
-label[for="uploadbutton"]:hover {
-    background-color: #28642d;
-}
-
-input::file-selector-button {
-    padding: 10px 20px;
-    background-color: #20322c;
-    border: 1px solid #1c0808;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
-
-input::file-selector-button:hover {
-    background-color: #28642d;
-}
-
-#deletebutton {
-    padding: 10px 20px;
-    background-color: #be4a4ac3;
-    border: 1px solid #b02c2cbe;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
-
-#deletebutton:hover {
-    background-color: #85383f;
-}
-
 /* Right container styling */
-
 #rightcontainer {
     width: 60%;
 }
 
 /* Form styling */
-
 form {
     width: 100%;
 }
 
 .input-group {
     display: flex;
+    flex-direction: column;
     margin-bottom: 1vh;
 }
 
 .input-group label {
-    width: 30%;
-    text-align: right;
+    margin-bottom: 0.5vh;
+    font-weight: bold;
 }
+
+/* Input, Textarea and Select Styling */
+input[type="text"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 100px; /* Adjust as needed */
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid #60cbb8; /* Change the color to fit your theme */
+}
+
+/* Button Styling */
+button {
+    background-color: #60cbb8;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #14a88d;
+}
+
+/* Image upload button styling */
+label[for="uploadbutton"],
+#deletebutton {
+    display: inline-block;
+    width: 48%; /* Adjust as needed for spacing */
+    padding: 10px 20px;
+    margin: 8px 0;
+    background-color: #359138;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+label[for="uploadbutton"]:hover,
+#deletebutton:hover {
+    background-color: #28642d;
+}
+
+/* Placeholder Styling */
+::placeholder {
+    color: #aaa;
+    font-size: 16px;
+    text-align: start;
+}
+
+/* Ensure the file input is not displayed since it's hidden */
+input[type="file"] {
+    display: none;
+}
+
+/* Adjust the delete button to match the account creation form */
+#deletebutton {
+    background-color: #be4a4a;
+    border-color: #b02c2c;
+}
+
+/* Buttons container styling */
+#buttonsupdate {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2vh;
+}
+
 
 </style>
 
