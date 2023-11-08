@@ -30,9 +30,9 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="genreoffood">Genre of Food</label>
-                            <select id="genreoffood" v-model="genreoffood" name="genreoffood" required>
-                                <option value="" selected hidden disabled>Select genre of food</option>
+                            <label for="typeofcuisine">Type of Cuisine</label>
+                            <select id="typeofcuisine" v-model="typeofcuisine" name="typeofcuisine" required>
+                                <option value="" selected hidden disabled>Select Type of Cuisine</option>
                                 <option value="Local">Local</option>
                                 <option value="Western">Western</option>
                                 <option value="Korean">Korean</option>
@@ -81,7 +81,7 @@ export default {
     data() {
         return {
             posttitle: "",
-            genreoffood: "",
+            typeofcuisine: "",
             pricepoint: "",
             address: "",
             caption: "",
@@ -134,7 +134,7 @@ export default {
                         UserID: this.uid,
                         Title: this.posttitle,
                         Address: this.address,
-                        GenreOfFood: this.genreoffood,
+                        typeofcuisine: this.typeofcuisine,
                         PricePoint: this.pricepoint,
                         Caption: this.caption,
                         Post_Image: image,
