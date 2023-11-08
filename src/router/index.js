@@ -3,6 +3,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth"
 
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
+import CreatePost from '@/views/CreatePostPage.vue';
 
 import HomePage from '@/views/HomePage.vue';
 import Japanese from '@/views/Japanese.vue';
@@ -31,6 +32,14 @@ const routes = [
     name: "SignUpPage",
     component: SignUpPage,
   },
+
+
+  {
+    path: '/createPost',
+    name: 'CreatePost',
+    component: CreatePost,
+  },
+
   {
     path: "/homepage",
     name: "HomePage",
@@ -66,6 +75,7 @@ const routes = [
     name: "UserQueryDisplayPage",
     component: userQueryDisplayPage,
 
+
     props: route => ({searchString: route.query.q})
   },
   {
@@ -90,14 +100,14 @@ const router = createRouter({
   routes,
 });
 
-/*let isAuthenticated = false;
+let isAuthenticated = false;
 
 const authPromise = new Promise((resolve) => {
   onAuthStateChanged(auth, (user) => {
     isAuthenticated = !!user;
     resolve();
   });
-});*/
+});
 
 
 export default router;
