@@ -14,7 +14,6 @@ const firebaseConfig = {
 
 const drigmo2 = initializeApp(firebaseConfig);
 
-
 const storage = getStorage(drigmo2);  
 
 export default drigmo2;

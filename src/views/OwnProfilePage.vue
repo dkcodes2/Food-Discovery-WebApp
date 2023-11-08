@@ -33,19 +33,20 @@
 </template>
   
 <script>
-import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
-import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
-import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
-import EditPostsButton from "../components/profile-page-components/EditPostsButton.vue";
 import NavBar from "../components/NavBar.vue"
+import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
+import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
+import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
+import EditPostsButton from "../components/profile-page-components/EditPostsButton.vue";
+
 
 export default {
     name: "OwnProfilePage",
     components: {
       NavBar,
       UserProfileInfo,
-      PostsContainer,
       ShareProfileButton,
+      PostsContainer,
       EditPostsButton,
     },
     data() {
