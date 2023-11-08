@@ -8,6 +8,7 @@
 		<p>{{ post.GenreOfFood }}</p>
 		<p>{{ post.Address }}</p>
 		<p>{{ post.PricePoint }}</p>
+		
 		<!-- Add more post details you want to show -->
 	  </div>
 	</div>
