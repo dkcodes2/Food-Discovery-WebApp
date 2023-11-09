@@ -1,73 +1,67 @@
 <template>
-    <div class="posts-container">
-      <img
-        loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/50e86733-862d-42c9-97ab-7cfb1e83268c?"
-        class="bg-posts"
-      />
-      <div class="post-item">
-        <PostItem />
-      </div>
-      <div class="post-item-2">
-        <PostItem />
-      </div>
-    </div>
-  </template>
+	<div>
+	  <h1>My Posts</h1>
+	  <div v-for="post in posts" :key="post.id">
+		<h3>{{ post.Title }}</h3>
+		<img :src="post.Image_URL" alt="Post image" />
+		<p>{{ post.Caption }}</p>
+		<p>{{ post.GenreOfFood }}</p>
+		<p>{{ post.Address }}</p>
+		<p>{{ post.PricePoint }}</p>
+		
+		<!-- Add more post details you want to show -->
+	  </div>
+	</div>
+</template>
   
+<script>
+// Correct the import path as per your project structure.
+import firebaseApp from '@/firebase.js'; // Change this to the correct path
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
   
+const db = getFirestore(firebaseApp);
+const auth = getAuth();
   
-  <style scoped>
-  .posts-container {
-    display: flex;
-    flex-direction: column;
-    fill: rgba(157, 157, 157, 0.33);
-    overflow: hidden;
-    align-self: start;
-    position: relative;
-    display: flex;
-    min-height: 1272px;
-    margin-top: 10px;
-    width: 100%;
-    padding: 11px 70px 386px 65px;
-    padding-left: 0%;
-  }
-  @media (max-width: 991px) {
-    .div {
-      max-width: 100%;
-      padding: 0 20px 100px;
-    }
-  }
-  .bg-posts {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-  .post-item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-  .post-item-2 {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin-top: 31px;
-  }
-  </style>
-  <script>
-  import PostItem from "@/components/profile-page-components/PostItem.vue";
+export default {
+	name: "PostsContainer",
   
-  export default {
-    name: "PostsContainer",
-    components: {
-      PostItem
-    },
-    props: {
-      posts: Array
-    }
-  }
-  </script>
+	data() {
+	  	return {
+		// Add a posts array to store the fetched posts
+		posts: [],
+	  	};
+	},
   
-  <!-- Add your styles here -->
+	async created() {
+	  	// Wait for the auth state to be resolved before fetching posts
+	  	onAuthStateChanged(auth, user => {
+		if (user) {
+			this.fetchPosts();
+		} else {
+		  	// Handle user not logged in or redirect to login page
+		}
+	  	});
+	},
+  
+	methods: {
+	  	async fetchPosts() {
+			const user = auth.currentUser;
+		if (user) {
+		  	const postsRef = collection(db, "Posts");
+		  	// Make sure to use the correct field name for UserID
+		  	const q = query(postsRef, where("UserID", "==", user.uid));
+		  	const querySnapshot = await getDocs(q);
+		  	this.posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+		}
+		}
+	}
+};
+</script>
+
+<style scoped>
+img {
+  max-width: 100%; /* ensures image is not wider than its container */
+  height: auto; /* maintains the aspect ratio */
+}
+</style>
