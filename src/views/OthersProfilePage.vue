@@ -1,5 +1,7 @@
 <template>
-      <!-- {{ docId }} -->
+<FllwButton :username = username />
+
+<!-- {{ docId }} -->
 <div class="profile-page">
       <div class="header">
         <div class="user-profile-info">
@@ -154,15 +156,16 @@ import UserProfileInfo from "@/components/profile-page-components/UserProfileInf
 import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
 import FollowButton from "@/components/profile-page-components/FollowButton.vue";
 import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
-
+import FllwButton from "@/components/FllwButton.vue";
 
 export default {
-    name: "OwnProfilePage",
+    name: "OthersProfilePage",
     components: {
     UserProfileInfo,
     PostsContainer,
     FollowButton,
     ShareProfileButton,
+    FllwButton,
 },
     data() {
         return {
@@ -172,7 +175,7 @@ export default {
     },
 
     props: {
-        docId: String,
+        username: String,
     }
     // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
 }
