@@ -18,7 +18,6 @@ import OwnProfilePage from '@/views/OwnProfilePage.vue';
 import OthersProfilePage from '@/views/OthersProfilePage.vue';
 import FollowingPage from '@/views/FollowingPage.vue';
 
-
 const auth = getAuth();
 
 const routes = [
@@ -32,7 +31,6 @@ const routes = [
     name: "SignUpPage",
     component: SignUpPage,
   },
-
 
   {
     path: '/createPost',

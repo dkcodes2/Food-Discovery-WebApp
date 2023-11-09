@@ -14,7 +14,7 @@
                         <span class = "itemname"> {{ friend.username }} </span>
                         <br>
 
-                        <p class = "userDescription"> {{ friend.userBio }}</p>
+                        <p class = "userDescription"> {{ friend.bio }}</p>
                     </router-link>
                 </div>
                 
@@ -60,7 +60,7 @@ export default {
 
     methods: {
         async searchFriends(stxt) {
-            let q = query(collection(db, "Users"), where('username', '>=', stxt), where("username", "<", stxt + "\uf8ff"))
+            let q = query(collection(db, "usernames"), where('username', '>=', stxt), where("username", "<", stxt + "\uf8ff"))
             let allDocuments = await getDocs(q)
             
             // this.searchList = []
@@ -69,31 +69,15 @@ export default {
             allDocuments.forEach((doc) => {
                 let doc_data = doc.data()
                 doc_data['docId'] = doc.id
-                doc_data['imageURL'] = ''
                 docs.push(doc_data)
                 // this.searchList.push(doc_data) 
 
 
             })
 
-            await Promise.all(docs.map(async (doc) => {
-                doc.imageURL = await this.fetchImageURL(doc.userImage);
-                console.log(doc.imageURL)
-                console.log(doc.userImage)
-                })
-            )
             this.searchList = docs;
         },
 
-        async fetchImageURL (imagePath) {
-            const imageRef = sref(storage, imagePath);
-            try {
-                return await getDownloadURL(imageRef);
-                // return "aaaaa"
-            } catch (error) {
-                console.error(error)
-            }
-        },
     },
 
     watch: {
