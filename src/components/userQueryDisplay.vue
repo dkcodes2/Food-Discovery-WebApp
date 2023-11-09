@@ -9,7 +9,8 @@
             <!-- <div class="queryItem" v-for = "friend in searchList" key="friend.username"> -->
             <div class="queryItem" v-for = "friend in searchList">
                 <div class = "nameAndBio">
-                    <router-link :to ="{name: 'HomePage', query: {q: friend.docId}}" class="routerLink"> 
+                    <router-link :to ="{name: 'OthersProfilePage', query: {q: friend.docId}}" class="routerLink"> 
+                        <div> {{ friend.docId }} </div>
                         <span class = "itemname"> {{ friend.username }} </span>
                         <br>
 
@@ -88,7 +89,7 @@ export default {
             } catch (error) {
                 console.error(error)
             }
-        }
+        },
     },
 
     watch: {

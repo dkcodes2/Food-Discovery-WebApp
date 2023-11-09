@@ -18,6 +18,8 @@ import OwnProfilePage from '@/views/OwnProfilePage.vue';
 import OthersProfilePage from '@/views/OthersProfilePage.vue';
 import FollowingPage from '@/views/FollowingPage.vue';
 
+import testPage from '@/views/TestPage.vue';
+
 
 const auth = getAuth();
 
@@ -68,7 +70,7 @@ const routes = [
   {
       path: '/Others',
       name: 'Others',
-      component: Others
+      component: Others,
   },
   {
     path: "/userquerydisplay",
@@ -87,12 +89,14 @@ const routes = [
     path: "/othersprofilepage",
     name: "OthersProfilePage",
     component: OthersProfilePage,
+
+    props: route => ({docId: route.query.q})
   },
   {
     path: "/followingpage",
     name: "FollowingPage",
     component: FollowingPage,
-  },
+  }
 ];
 
 const router = createRouter({

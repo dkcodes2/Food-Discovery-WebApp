@@ -1,5 +1,6 @@
 <template>
-    <div class="profile-page">
+      <!-- {{ docId }} -->
+<div class="profile-page">
       <div class="header">
         <div class="user-profile-info">
           <UserProfileInfo />
@@ -169,6 +170,10 @@ export default {
             userPosts: []    // the posts of the user being viewed
         };
     },
+
+    props: {
+        docId: String,
+    }
     // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
 }
 </script>
