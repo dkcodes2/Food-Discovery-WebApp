@@ -1,6 +1,6 @@
 <!-- FollowingPage.vue -->
 <template>
-    <div style = "text-align: center;">
+    <div class="main" style = "text-align: center;">
         <navBar />
         <br>
         <userQueryDisplay :searchText = searchString />
@@ -39,6 +39,8 @@
   </script>
   
   <style>
-
+.main{
+    border: solid 1px blue
+}
   </style>
   

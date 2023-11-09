@@ -18,8 +18,9 @@
                 </div>
                 
                 <div class = "profileImage">
-                    Test
+                    <img v-if=friend.imageURL :src = "friend.imageURL" alt="profileImage">
                 </div>
+                <!-- <img src="https://firebasestorage.googleapis.com/v0/b/drigmo2-8f507.appspot.com/o/ProfileImages%2FdefaultProfileImage.jpg?alt=media&token=36a3d2e7-b56f-4e00-b566-c469026ea5c4" alt=""> -->
             </div>
 
         </div>        
@@ -34,13 +35,12 @@ import drigmo2 from "../firebase.js"
 import {getFirestore} from "firebase/firestore"
 import {collection, query, where, getDocs, doc, deleteDoc} from "firebase/firestore"
 
+import {getStorage, ref as sref, getDownloadURL} from "firebase/storage";
 
 const db = getFirestore(drigmo2);
+const storage = getStorage(drigmo2);
 
 export default {
-    
-    
-
     
     data() {
         return {
@@ -57,15 +57,37 @@ export default {
         async searchFriends(stxt) {
             let q = query(collection(db, "Users"), where('username', '>=', stxt), where("username", "<", stxt + "\uf8ff"))
             let allDocuments = await getDocs(q)
-            this.searchList = []
+            
+            // this.searchList = []
+            const docs = [];
+            
             allDocuments.forEach((doc) => {
                 let doc_data = doc.data()
                 doc_data['docId'] = doc.id
-                this.searchList.push(doc_data) 
+                doc_data['imageURL'] = ''
+                docs.push(doc_data)
+                // this.searchList.push(doc_data) 
 
 
             })
 
+            await Promise.all(docs.map(async (doc) => {
+                doc.imageURL = await this.fetchImageURL(doc.userImage);
+                console.log(doc.imageURL)
+                console.log(doc.userImage)
+                })
+            )
+            this.searchList = docs;
+        },
+
+        async fetchImageURL (imagePath) {
+            const imageRef = sref(storage, imagePath);
+            try {
+                return await getDownloadURL(imageRef);
+                // return "aaaaa"
+            } catch (error) {
+                console.error(error)
+            }
         }
     },
 
@@ -103,14 +125,21 @@ body {
 }
 
 .queryContainer {
+    
     margin-top: 50px;
-    width: 100%;
+    /* width: 100%; */
+    width: inherit;
     margin-left: auto;
     margin-right: auto;
     border-left: 3px solid #4863A0;
     border-right: 3px solid #2F539B;
     padding: 20px;
     text-align:left;
+}
+
+.queryItem {
+    display:flex;
+    align-items: center;
 }
 
 .routerLink {
@@ -126,11 +155,10 @@ body {
 }
 
 .profileImage {
-    background-color: red;
     text-align: right;
-    width: 25%;
     margin-left: 5%;
     display: inline-flex;
+    border: solid black;
 }
 
 .itemname:hover {
@@ -151,5 +179,10 @@ body {
 .userDescription {
     margin-left:70px;
     line-height: 2.0;
+}
+
+img {
+    width: 100px;
+    height:100ppx
 }
 </style>
