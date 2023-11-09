@@ -14,7 +14,7 @@
         </div>
   </div>
   
->>>>>>> 4a3d3f4f400275f99d2711d8d4d336dda1a36b12
+<!-- >>>>>>> 4a3d3f4f400275f99d2711d8d4d336dda1a36b12 -->
 
   <!-- <div id="nav" v-if="user && $route.name !== 'SignUpPage' && $route.name !== 'LogInPage' && $route.name !== 'PasswordRecoveryPage'"> -->
 

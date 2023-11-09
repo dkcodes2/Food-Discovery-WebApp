@@ -8,12 +8,18 @@
         <div class="queryContainer">
             <!-- <div class="queryItem" v-for = "friend in searchList" key="friend.username"> -->
             <div class="queryItem" v-for = "friend in searchList">
-            <router-link :to ="{name: 'HomePage', query: {q: friend.docId}}" class="routerLink"> 
-                <span class = "itemname"> {{ friend.username }} </span>
-                <br>
+                <div class = "nameAndBio">
+                    <router-link :to ="{name: 'HomePage', query: {q: friend.docId}}" class="routerLink"> 
+                        <span class = "itemname"> {{ friend.username }} </span>
+                        <br>
 
-                <p class = "userDescription"> {{ friend.user_description }}</p>
-            </router-link>
+                        <p class = "userDescription"> {{ friend.userBio }}</p>
+                    </router-link>
+                </div>
+                
+                <div class = "profileImage">
+                    Test
+                </div>
             </div>
 
         </div>        
@@ -28,11 +34,13 @@ import drigmo2 from "../firebase.js"
 import {getFirestore} from "firebase/firestore"
 import {collection, query, where, getDocs, doc, deleteDoc} from "firebase/firestore"
 
+
 const db = getFirestore(drigmo2);
 
 export default {
     
     
+
     
     data() {
         return {
@@ -96,7 +104,7 @@ body {
 
 .queryContainer {
     margin-top: 50px;
-    width: 64%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     border-left: 3px solid #4863A0;
@@ -108,6 +116,21 @@ body {
 .routerLink {
     text-decoration: none;
     color:black;
+}
+
+.nameAndBio {
+    background-color: aquamarine;
+    text-align: left;
+    width: 70%;
+    display: inline-flex;
+}
+
+.profileImage {
+    background-color: red;
+    text-align: right;
+    width: 25%;
+    margin-left: 5%;
+    display: inline-flex;
 }
 
 .itemname:hover {
