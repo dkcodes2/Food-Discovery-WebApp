@@ -7,7 +7,7 @@
     </div>
 
     <p>
-        Search String: {{  searchString }}
+        <!-- Search String: {{  searchString }} -->
     </p>
 
 </template>
@@ -39,8 +39,6 @@
   </script>
   
   <style>
-.main{
-    border: solid 1px blue
-}
+
   </style>
   

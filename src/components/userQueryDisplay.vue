@@ -1,7 +1,7 @@
 <!-- TEMPORARILY NOT IN USE -->
 
 <template>
-    <div id="main">
+    <div id="main" v-if="uid">
         <div id = "page-title">Search Results</div>
         <div id = "user-query">You searched for: {{ searchText }} </div>
 
@@ -10,7 +10,7 @@
             <div class="queryItem" v-for = "friend in searchList">
                 <div class = "nameAndBio">
                     <router-link :to ="{name: 'OthersProfilePage', query: {q: friend.docId}}" class="routerLink"> 
-                        <div> {{ friend.docId }} </div>
+                        <!-- <div> {{ friend.docId }} </div> -->
                         <span class = "itemname"> {{ friend.username }} </span>
                         <br>
 
@@ -37,6 +37,10 @@ import {getFirestore} from "firebase/firestore"
 import {collection, query, where, getDocs, doc, deleteDoc} from "firebase/firestore"
 
 import {getStorage, ref as sref, getDownloadURL} from "firebase/storage";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+const auth = getAuth();
+
 
 const db = getFirestore(drigmo2);
 const storage = getStorage(drigmo2);
@@ -46,7 +50,7 @@ export default {
     data() {
         return {
             searchList: [],
-            user: false
+            uid: null
         }
     },
 
@@ -103,6 +107,11 @@ export default {
 
     created() {
         this.searchFriends(this.searchText)
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.uid = user.uid;
+            }
+        })
     }
     }
 
@@ -133,7 +142,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     border-left: 3px solid #4863A0;
-    border-right: 3px solid #2F539B;
+    border-right: 3px solid #4863A0;
     padding: 20px;
     text-align:left;
 }
@@ -149,7 +158,7 @@ body {
 }
 
 .nameAndBio {
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
     text-align: left;
     width: 70%;
     display: inline-flex;
