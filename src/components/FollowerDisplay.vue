@@ -89,6 +89,9 @@ export default {
                 // }
                 
             })
+            this.searchList.sort(function(a,b) {
+                return b.username - a.username
+            });
 
         },
 
