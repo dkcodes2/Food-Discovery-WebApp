@@ -1,12 +1,16 @@
 <!-- FollowingPage.vue -->
 <template>
-    <div class="main" style = "text-align: center;">
+    <div class="main" v-if="user" style = "text-align: center;">
+    <!-- <div class="main" style = "text-align: center;"> -->
         <navBar />
         <br> 
-        <userQueryDisplay  :searchText = searchString  />
+        <userQueryDisplay  :searchText = searchString   />
         <!-- <userQueryDisplay :searchText = searchString /> -->
     </div>
-
+    <div v-else> 
+        <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
+    </div>
+    
     <p>
         <!-- Search String: {{  searchString }} -->
     </p>
@@ -25,7 +29,12 @@
     components: {
         navBar,
         userQueryDisplay,
-        user:false
+        
+    },
+    data () {
+        return {
+            user: false,
+        }
     },
     props: {
         searchString: String
@@ -37,14 +46,7 @@
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 this.user = user;
-                console.log("aa:"+user.uid)
-                // this.getFollowingField(this.user.uid).then( (userObj) => {
-                //     let data = userObj.data()
- 
-                //     this.myUsername = userObj.id
-                //     // console.log(this.myUsername)
 
-                // })
             }
         })
     }

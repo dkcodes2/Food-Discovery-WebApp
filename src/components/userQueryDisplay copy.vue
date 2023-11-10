@@ -35,7 +35,7 @@
 <script>
 import drigmo2 from "../firebase.js"
 import {getFirestore} from "firebase/firestore"
-import {collection, query, where, getDocs, doc, deleteDoc, startAt, orderBy} from "firebase/firestore"
+import {collection, query, where, getDocs, doc, deleteDoc} from "firebase/firestore"
 
 import {getStorage, ref as sref, getDownloadURL} from "firebase/storage";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -70,8 +70,6 @@ export default {
             // const collectionRef = db.collection("usernames");
             //const q = collectionRef.orderBy(firebase.firestore.FieldPath.documentId());
             
-            // let q = query(collection(db, "usernames"), orderBy(getStorage().FilePath.documentId()), startAt(stxt)  )
-
             let q = query(collection(db, "usernames"));
             let allDocuments = await getDocs(q)
             
@@ -91,9 +89,6 @@ export default {
 
             })
 
-            this.searchList.sort(function(a,b) {
-                return b.username - a.username
-            });
             // this.searchList = docs;
         },
 
