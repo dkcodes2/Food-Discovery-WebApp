@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<!-- <div>
 	  <h1>My Posts</h1>
 	  <div v-for="post in posts" :key="post.id">
 		<h3>{{ post.Title }}</h3>
@@ -9,12 +9,14 @@
 		<p>{{ post.Address }}</p>
 		<p>{{ post.PricePoint }}</p>
 		
-		<!-- Add more post details you want to show -->
+
 	  </div>
-	</div>
+	</div> -->
+	<div><PostItem v-for="post in posts" :key="post.id" :post="post" /></div>
 </template>
   
 <script>
+import PostItem from "@/components/profile-page-components/PostItem.vue";
 // Correct the import path as per your project structure.
 import firebaseApp from '@/firebase.js'; // Change this to the correct path
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
@@ -25,7 +27,9 @@ const auth = getAuth();
   
 export default {
 	name: "PostsContainer",
-  
+	components: {
+		PostItem
+	},
 	data() {
 	  	return {
 		// Add a posts array to store the fetched posts
@@ -54,7 +58,31 @@ export default {
 		  	const querySnapshot = await getDocs(q);
 		  	this.posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 		}
-		}
+		},
+
+		handleEditPost(postId) {
+      // Logic to handle post editing
+      // This could show an edit form and update the post in the database
+    },
+	async handleDeletePost(postId) {
+  try {
+    // Step 1: Delete the post from Firestore
+    const postRef = doc(db, "Posts", postId);
+    await deleteDoc(postRef);
+
+    // Step 2: Remove the post from the local state
+    this.posts = this.posts.filter(post => post.id !== postId);
+
+    // Optional: Show a success message to the user
+    alert("Post deleted successfully!");
+  } catch (error) {
+    // Handle any errors in the deletion process
+    console.error("Error deleting post: ", error);
+    // Optional: Show an error message to the user
+    alert("Failed to delete post.");
+  }
+}
+
 	}
 };
 </script>

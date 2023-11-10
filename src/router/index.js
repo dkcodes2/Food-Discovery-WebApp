@@ -18,7 +18,6 @@ import OwnProfilePage from '@/views/OwnProfilePage.vue';
 import OthersProfilePage from '@/views/OthersProfilePage.vue';
 import FollowingPage from '@/views/FollowingPage.vue';
 
-import testPage from '@/views/TestPage.vue';
 
 
 const auth = getAuth();
