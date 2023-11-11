@@ -137,7 +137,10 @@ export default {
             immediate: true,
             handler(val, oldVal) {
                 console.log("watch")
-                // this.searchFriends(val)
+                if (this.myUsername) {
+                    this.searchFriends(val)
+                }
+        
             }
         }
     },
@@ -216,7 +219,6 @@ body {
     text-align: right;
     margin-left: 5%;
     display: inline-flex;
-    border: solid black;
 }
 
 .itemname:hover {

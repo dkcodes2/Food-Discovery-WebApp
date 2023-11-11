@@ -1,6 +1,36 @@
 <template>
   <div>
+
+  <div v-if=user>
+
     <div class="navbar-container">
+        <NavBar style = "align-items: center;"/>
+    </div>
+
+        
+    
+    <div class="profile-page">
+        <div class="header">
+            <div class="user-profile-info">
+            <UserProfileInfo :doc_id="docID" />
+            </div>
+            <!-- <div class="buttons"> -->
+            <div class="div">
+                <!-- <div class="column-4"> -->
+                <!-- </div> -->
+                <!-- <div class="column-5"> -->
+                    <ShareProfileButton/>
+                <!-- </div> -->
+            </div>
+            <!-- </div> -->
+        </div><br><br>
+        <div class="div-4">
+        <PostsContainer :uid = user.uid type="self" />
+        </div>
+    </div>
+
+   
+    <!-- <div class="navbar-container">
       <NavBar/>
     </div>
     <div class="profile-page">
@@ -15,8 +45,15 @@
       <div class="div-4">
         <PostsContainer />
       </div>
+    </div> -->
+
+
+</div>
+<div v-else> 
+        <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
     </div>
-  </div>
+</div>
+
 </template>
 
 
@@ -26,6 +63,7 @@ import NavBar from "../components/NavBar.vue"
 import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
 import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
 import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
 export default {
@@ -37,12 +75,27 @@ export default {
       PostsContainer,
 
     },
+
+
+
     data() {
         return {
-          docID: this.$route.params.docID || 'EMAILTEST@EMAIL.COM',
-
+          // docID: this.$route.params.docID || 'EMAILTEST@EMAIL.COM',
+          docID: "self",
+          user: false,
         };
     },
+    created() {
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+                console.log("OwnprofilePage printing userID: " + this.user.uid)
+            }
+        })
+    }
+
     // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
 }
 </script>
@@ -72,6 +125,7 @@ export default {
   flex-direction: column;
   /* Assuming .profile-page needs to be centered or specific width */
   width: 100%; /* or set to a specific width if necessary */
+  width: 800px;
   align-items: center; /* Centers the child elements horizontally */
   margin: auto; /* If you want to center the profile-page in the viewport */
 }

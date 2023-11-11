@@ -1,7 +1,8 @@
 <template>
 	<div>
+
 	  <!-- <PostItem v-for="post in posts" :key="post.id" :post="post" /> -->
-	  <PostItem v-for="post in posts" :key="post.id" :post="post" @edit-post="handleEditPost" @delete-post="handleDeletePost"/>
+	  <PostItem v-for="post in posts" :key="post.id" :post="post" :postType = "this.type" @edit-post="handleEditPost" @delete-post="handleDeletePost"/>
 	</div>
 </template>
   
@@ -28,28 +29,37 @@ export default {
 		posts: [],
 	  	};
 	},
+    props: {
+        uid: String,
+        type: String,
+    }
   
-	async created() {
+	, created() {
+        console.log("created " + this.uid)
+        this.fetchPosts(this.uid);
+
 	  	// Wait for the auth state to be resolved before fetching posts
-	  	onAuthStateChanged(auth, user => {
-		if (user) {
-			this.fetchPosts();
-		} else {
-		  	// Handle user not logged in or redirect to login page
-		}
-	  	});
+	  	// onAuthStateChanged(auth, user => {
+		// if (user) {
+            
+		// 	this.fetchPosts();
+		// } else {
+		//   	// Handle user not logged in or redirect to login page
+		// }
+	  	// });
 	},
   
 	methods: {
-	  	async fetchPosts() {
-			const user = auth.currentUser;
-		if (user) {
+	  	async fetchPosts(uid) {
+
+			// const user = auth.currentUser;
+		// if (user) {
 		  	const postsRef = collection(db, "Posts");
 		  	// Make sure to use the correct field name for UserID
-		  	const q = query(postsRef, where("UserID", "==", user.uid));
+		  	const q = query(postsRef, where("UserID", "==", uid));
 		  	const querySnapshot = await getDocs(q);
 		  	this.posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-		}
+		// }
 		},
 
 

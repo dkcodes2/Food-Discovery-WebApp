@@ -1,37 +1,57 @@
 <template>
-  <div>
-  <NavBar style = "align-items: center;"/>
+  <div v-if = "user">
+    <NavBar style = "align-items: center;"/>
     <div class="profile-page">
       <div class="header">
         <div class="user-profile-info">
-          <UserProfileInfo :doc-id="docID" />
-        </div>
-        <div class="buttons">
-          <div class="div">
+            <!-- to pass username into UserProfileInfo later -->
+            <UserProfileInfo :doc_id= username /> <br>
             <div class="column-4">
               <FllwButton :username = username />
             </div>
+        </div>
+    
+        <div class="buttons">
+            
+          <div class="div">
+   
             <div class="column-5">
                 <ShareProfileButton/>
             </div>
           </div>
         </div>
       </div>
+      <br>
+      <br>
       <div class="div-4">
-       <PostsContainer />
+       <!-- <PostsContainer v-if=UID uid="aaaa" type="others"/> -->
+       <PostsContainer v-if=UID :uid=UID type="others"/>
       </div>
     </div>
   </div>
+  <div v-else> 
+        <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
+    </div>
 </template>
     
   
   <script>
+  
+  
   import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
   import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
   import FollowButton from "@/components/profile-page-components/FollowButton.vue";
   import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
   import FllwButton from "@/components/FllwButton.vue";
+  import NavBar from "../components/NavBar.vue"
   
+  import { getFirestore, collection, query, where, getDoc, doc } from "firebase/firestore";
+  import { getAuth, onAuthStateChanged } from 'firebase/auth';
+//   import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+  import firebaseApp from '@/firebase.js';
+
+  const db = getFirestore(firebaseApp);
+
   export default {
       name: "OthersProfilePage",
       components: {
@@ -40,18 +60,46 @@
       FollowButton,
       ShareProfileButton,
       FllwButton,
+      NavBar,
   },
       data() {
           return {
               viewedUser: {},  // the data of the user being viewed
-              userPosts: []    // the posts of the user being viewed
+              userPosts: [],    // the posts of the user being viewed
+              UID: "",
+              user: false,
           };
       },
-  
       props: {
           username: String,
-      }
+      },
+
+      methods: {
+        async setTargetUID(db, username) {
+            console.log(username);
+            const docRef = doc(db, "usernames", username)
+            const docSnap = await getDoc(docRef);
+            this.UID = docSnap.data().uid;
+            // console.log("OthersProfilePage setTargetUID: " + this.UID)
+        }
+      },
+  
+
       // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
+
+      created() {
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+                console.log("OwnprofilePage printing userID: " + this.user.uid)
+            }
+        })
+        // console.log("UserProfilePage created") 
+        this.setTargetUID(db, this.username);
+      }
+
   }
   </script>
 
@@ -66,15 +114,18 @@
   width: 100%; /* or set to a specific width if necessary */
   align-items: center; /* Centers the child elements horizontally */
   margin: auto; /* If you want to center the profile-page in the viewport */
+  width:800px;
 }
 .header {
   align-self: start;
   display: flex;
   width: 728px;
   max-width: 100%;
-  flex-direction: column;
+  /* flex-direction: column; */
   margin: 96px 0 0 73px;
   padding: 0 20px;
+  gap: 20px;
+
 }
 @media (max-width: 991px) {
   .header {
@@ -109,6 +160,8 @@
 align-self: stretch;
 padding-right: 38px;
 margin: 23px -20px 0 0;
+margin-top:50px;
+margin-left:50px;
 }
 @media (max-width: 991px) {
 .buttons {
