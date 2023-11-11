@@ -36,7 +36,6 @@ import NavBar from "../components/NavBar.vue"
 import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
 import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
 import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
-import EditPostsButton from "../components/profile-page-components/EditPostsButton.vue";
 
 
 export default {
@@ -46,7 +45,6 @@ export default {
       UserProfileInfo,
       ShareProfileButton,
       PostsContainer,
-      EditPostsButton,
     },
     data() {
         return {
