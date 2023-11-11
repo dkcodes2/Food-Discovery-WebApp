@@ -47,7 +47,6 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase
 import { doc, setDoc, getFirestore, getDoc } from "firebase/firestore"; 
 import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { storage } from '../firebase.js'; // Ensure this path is correct for your setup
-// Other imports...
 import { arrayUnion, updateDoc } from "firebase/firestore";
 
 
