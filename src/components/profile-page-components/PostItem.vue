@@ -15,7 +15,7 @@
     <div class="caption">{{ post.Title }}</div>
     <div class="description">
       <p>{{ post.Caption }}</p>
-      <p>Cuisine: {{ post.typeofcuisine }}</p>
+      <p>Cuisine: {{ post.TypeOfCuisine }}</p>
       <p>Location: {{ post.Address }}</p>
       <p>Price: {{ post.PricePoint }}</p>
       <!-- Add more post details you want to show -->
