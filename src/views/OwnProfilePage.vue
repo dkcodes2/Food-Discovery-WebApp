@@ -9,13 +9,6 @@
         <div class="buttons">
           <div class="div">
             <div class="column-4">
-                <DeletePostsButton />
-              <!--  Tab icon optional to keep
-                <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a5da4435-43d4-4860-b777-0955163847f1?"
-                class="img-2"
-              /> -->
             </div>
             <div class="column-5">
                 <ShareProfileButton/>
@@ -45,6 +38,7 @@ export default {
       UserProfileInfo,
       ShareProfileButton,
       PostsContainer,
+
     },
     data() {
         return {

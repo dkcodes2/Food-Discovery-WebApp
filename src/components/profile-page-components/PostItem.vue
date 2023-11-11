@@ -3,6 +3,7 @@
         <!-- Edit/Delete buttons -->
     <button @click="editPost(post.id)" class="edit-button"></button> 
     <button @click="deletePost(post.id)" class="delete-button"></button>
+    
     <div class="images">
       <div class="div">
         <!-- Assuming you want to display one image per post, use only one column. Adjust as needed. -->
@@ -40,10 +41,12 @@ export default {
   },
   methods: {
     editPost(postId) {
+      console.log('Edit button clicked:', postId);
       // Emit an event to the parent component to handle editing
       this.$emit('edit-post', postId);
     },
     deletePost(postId) {
+      console.log('Delete button clicked:', postId);
       // Emit an event to the parent component to handle deletion
       this.$emit('delete-post', postId);
     }
@@ -120,7 +123,10 @@ export default {
   cursor: pointer;
   position: absolute; /* Absolute position */
   top: 10px; /* Distance from the top of the card */
-  z-index: 2; /* Ensure the buttons are above the image */
+  z-index: 10; /* Ensure the buttons are above the image */
+  background-image: none;
+  background-color: red; /* Temporary background color for testing */
+
 }
 
 /* Position each button */
