@@ -1,13 +1,10 @@
 <template>  
-<template>  
   <div id="main">
         <img class = "logo" src = "@/assets/logo_transparent.png" alt = "logo">
         <div id = "nav">
             <router-link to="HomePage" class="routerlink" style="margin-right: 1vw;"> Discover </router-link>
             <router-link to="OwnProfilePage" class="routerlink" style="margin-right: 1vw;"> Profile </router-link>
-            <button class="logout-button" @click="logout" > Logout </button>     
-            <router-link to="OwnProfilePage" class="routerlink" style="margin-right: 1vw;"> Profile </router-link>
-            <button class="logout-button" @click="logout" > Logout </button>     
+            <button class="logout-button" @click="logout" > Logout </button>       
         </div>
         <div id="nav-search">
             <input v-model = "searchInput" type="text" placeholder = "&#128269; search for friends">&nbsp;
