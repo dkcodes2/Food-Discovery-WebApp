@@ -6,7 +6,6 @@
           <img
             :src="userImage"
             loading="lazy"
-            :srcset="userImageSrcSet"
             class="profile-pic"
             alt="Profile Picture"
           />
@@ -25,7 +24,7 @@
       </div>
     </div>
     <div class="biography">
-      {{ userBio}}
+      {{ userBio }}
     </div>
   </div>
 </template>
@@ -77,13 +76,32 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
   },
   data() {
     return {
-      profileData: null,
-      userId: ''
-    };
+      username: '',
+      userId: '',
+      // useremail:'',
+      // username: 'nameless',
+      // userImage: 'profile picture',
+      // userBio: 'this user has no bio yet',
+      // userPosts: 0,
+      // userFollowing: 0,
+    }
   },
-  created() {
-    this.fetchUserProfileInfo();
-  },
+  async created() {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, so fetch the username
+                this.userId = user.uid;
+                this.fetchUsername(this.userId);
+            } else {
+                // No user is signed in
+                this.username = "Guest";
+            }
+        });
+    },
+  
+  
+
   methods: {
     async fetchUsername(uid) {
     console.log("Fetching username for UID:", uid); // Debugging line
@@ -225,6 +243,7 @@ export default {
 }
 </script>
 
+
 <style scoped>
 .user-profile-info {
   display: flex;
@@ -345,3 +364,6 @@ export default {
   }
 }
 </style>
+
+
+

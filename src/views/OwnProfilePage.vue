@@ -4,16 +4,12 @@
     <div class="profile-page">
       <div class="header">
         <div class="user-profile-info">
-          <UserProfileInfo />
+          <UserProfileInfo :doc-id="docID" />
         </div>
         <div class="buttons">
           <div class="div">
             <div class="column-4">
-
-                <EditPostsButton />
-
-
-                
+                <DeletePostsButton />
               <!--  Tab icon optional to keep
                 <img
                 loading="lazy"
@@ -31,8 +27,9 @@
        <PostsContainer />
       </div>
     </div>
-    </div>
+  </div>
 </template>
+
   
 <script>
 import NavBar from "../components/NavBar.vue"
@@ -53,14 +50,16 @@ export default {
     },
     data() {
         return {
-            viewedUser: {},  // the data of the user being viewed
-            userPosts: []    // the posts of the user being viewed
+          docID: this.$route.params.docID || 'EMAILTEST@EMAIL.COM',
+
         };
     },
     // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
 }
 </script>
 
+  
+  
 <style scoped>
 .profile-page {
   /* border: 1px solid #000; */
@@ -176,5 +175,17 @@ margin: 23px -20px 0 0;
   }
 }
 
+.column-5 {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 17%;
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  .column-5 {
+    width: 100%;
+  }
+}
 
 </style>

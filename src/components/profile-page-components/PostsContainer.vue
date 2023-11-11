@@ -1,19 +1,8 @@
 <template>
-	<!-- <div>
-	  <h1>My Posts</h1>
-	  <div v-for="post in posts" :key="post.id">
-		<h3>{{ post.Title }}</h3>
-		<img :src="post.Image_URL" alt="Post image" />
-		<p>{{ post.Caption }}</p>
-		<p>{{ post.GenreOfFood }}</p>
-		<p>{{ post.Address }}</p>
-		<p>{{ post.PricePoint }}</p>
-		
-
-	  </div>
-	</div> -->
-	<div><PostItem v-for="post in posts" :key="post.id" :post="post" @delete-post="handleDeletePost" @edit-post="handleEditPost"/></div>
-</template>
+	<div>
+	  <PostItem v-for="post in posts" :key="post.id" :post="post" />
+	</div>
+  </template>
   
 <script>
 import PostItem from "@/components/profile-page-components/PostItem.vue";

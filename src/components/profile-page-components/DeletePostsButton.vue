@@ -1,10 +1,10 @@
 <template>
-    <div class="edit-posts-button">Edit Posts</div>
- </template>
+    <div class="delete-posts-button">Delete Post(s)</div>
+</template>
    
  <script>
    export default {
-     name: 'EditPostsButton',
+     name: 'DeletePostsButton',
      data() {
        return {
          
@@ -14,7 +14,7 @@
  </script>
    
  <style scoped>
-   .edit-posts-button {
+   .delete-posts-button {
    justify-content: center;
    align-items: center;
    border-radius: 30px;
@@ -27,13 +27,13 @@
    font: 400 30px Inter, sans-serif;
  }
  @media (max-width: 991px) {
-   .edit-posts-button {
+   .delete-posts-button {
      max-width: 100%;
      padding: 0 20px;
    }
  }
  
-   .edit-posts-button:hover {
+   .delete-posts-button:hover {
        transform: scale(1.1);
    }
  </style>
