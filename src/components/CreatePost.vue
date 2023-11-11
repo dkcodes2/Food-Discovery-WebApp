@@ -7,7 +7,7 @@
         <div id="container">
             <div id="leftcontainer">
                 <div id="postphotoset">
-                    <img id="postphoto" src="../assets/defaultPost.png" alt="Post Photo">
+                    <img id="postphoto" src="../assets/defaultProfile.png" alt="Post Photo">
                     <div id="buttonsupdate">
                         <label for="uploadbutton">Upload Image</label>
                         <input type="file" id="uploadbutton" accept="image/*" v-on:change="updatePostImage" ref="uploadbutton" hidden />
@@ -190,8 +190,6 @@ export default {
                 document.getElementById("postphoto").src="../assets/defaultPost.png"
             }
         },
-
-        
 
         // To delete the post image from firebase
         deletePostImage: function() {

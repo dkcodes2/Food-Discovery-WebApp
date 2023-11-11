@@ -1,7 +1,8 @@
 <template>
     <div id="mainContainer">  
         <div id="imageContainer">  
-            <img :src="imageUrl || '../assets/defaultProfile.png'" alt="Profile picture">
+            <img id="profilephoto" :src="imageUrl ? imageUrl : '../assets/defaultProfile.png'" alt="Profile picture">
+
             <input type="file" id="imageUpload" accept="image/*" @change="onImageSelected" ref="imageUpload" hidden>
             <button type="button" @click="triggerFileUpload" id="uploadImageButton">Upload Image</button>
             <button v-if="imageUrl" type="button" @click="deleteImage" id="deleteImageButton" >Remove Image</button>
@@ -82,6 +83,9 @@ export default {
                 reader.onload = (e) => {
                     this.imageUrl = e.target.result;
                 };
+                
+            }else {
+                this.imageUrl = null;
             }
         },
 
@@ -93,22 +97,24 @@ export default {
         },
 
         async deleteImage() {
-            if (!this.imageUrl) return;
+            // Reset the file input
+            if (this.$refs.imageUpload) {
+                this.$refs.imageUpload.value = "";
+            }
 
-            // Create a reference to the file to delete
-            const imageRef = storageRef(storage, this.imageUrl);
+            // Update the image to the default profile picture
+            let profileImageElement = document.getElementById("profilephoto");
+            if (profileImageElement) {
+                profileImageElement.src = "../assets/defaultProfile.png";
+            }
 
-            // Delete the file
-            await deleteObject(imageRef)
-            .then(() => {
-                this.imageFile = null;
-                this.imageUrl = null;
-                console.log('Image deleted successfully');
-            })
-            .catch((error) => {
-                console.error('Error removing image: ', error);
-            });
+            // Update Vue data properties
+            this.imageFile = null;
+            this.imageUrl = null;
+
+            console.log('Image reset to default successfully');
         },
+
 
         async register() {
             const auth = getAuth();
