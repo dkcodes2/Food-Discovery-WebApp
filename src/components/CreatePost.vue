@@ -68,7 +68,7 @@
 <script>
 import firebaseApp, { storage } from '../firebase.js';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { getFirestore, setDoc } from "firebase/firestore";
+import { getFirestore, setDoc, serverTimestamp } from "firebase/firestore";
 import { doc, getDoc, collection } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -139,7 +139,8 @@ export default {
                         Caption: this.caption,
                         Post_Image: image,
                         Post_Available: true,
-                        Image_URL: url
+                        Image_URL: url,
+                        CreatedAt: serverTimestamp()
                     }, {merge: true})
                     console.log("LOL", url)
                     alert("Post created!")
