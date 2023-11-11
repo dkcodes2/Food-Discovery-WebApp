@@ -1,14 +1,11 @@
 <template>
   <div>
-
   <div v-if=user>
 
     <div class="navbar-container">
         <NavBar style = "align-items: center;"/>
     </div>
 
-        
-    
     <div class="profile-page">
         <div class="header">
             <div class="user-profile-info">
@@ -25,30 +22,10 @@
             <!-- </div> -->
         </div><br><br>
         <div class="div-4">
-        <PostsContainer :uid = user.uid type="self" />
+          <PostsContainer :uid = user.uid type="self" />
         </div>
     </div>
-
-   
-    <!-- <div class="navbar-container">
-      <NavBar/>
-    </div>
-    <div class="profile-page">
-      <div class="header">
-        <div class="user-profile-info">
-          <UserProfileInfo :doc-id="docID" />
-          <div>
-            <ShareProfileButton/>
-          </div>
-        </div>
-      </div>
-      <div class="div-4">
-        <PostsContainer />
-      </div>
-    </div> -->
-
-
-</div>
+  </div>
 <div v-else> 
         <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
     </div>
@@ -73,10 +50,7 @@ export default {
       UserProfileInfo,
       ShareProfileButton,
       PostsContainer,
-
     },
-
-
 
     data() {
         return {

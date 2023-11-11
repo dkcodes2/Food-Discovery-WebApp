@@ -23,7 +23,7 @@ const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
 export default {
-    name: 'DiscoveryFeed',
+    name: 'JapaneseDiscoveryFeed',
 
     data() {
         return {
@@ -87,8 +87,12 @@ export default {
             console.log("Retreived:" + followingUIDs);
 
             // 4) Go through each document in posts and check if the "userID" is in the array
-            const postsQuery = query(collection(db, 'Posts'), orderBy('CreatedAt', 'desc'))
-            const postsQuerySnapshot = await getDocs(postsQuery);;
+            const postsQuery = query(
+				collection(db, 'Posts'), 
+				where('TypeOfCuisine', '==', 'Japanese'),
+				orderBy('CreatedAt', 'desc'));
+				
+            const postsQuerySnapshot = await getDocs(postsQuery);
   
             postsQuerySnapshot.forEach((postDoc) => {
                 const post = postDoc.data();

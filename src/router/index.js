@@ -49,23 +49,24 @@ const routes = [
     component: PasswordRecoveryPage,
   },
 
-
-
   {
     path: "/homepage",
     name: "HomePage",
     component: HomePage,
   },
+
   { 
       path: '/Japanese', 
       name: 'Japanese', 
       component: Japanese 
   },
+
   { 
       path: '/Korean', 
       name: 'Korean', 
       component: Korean
   },
+  
   {
       path: '/Western',
       name: 'Western',

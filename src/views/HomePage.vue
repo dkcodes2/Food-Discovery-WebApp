@@ -1,10 +1,13 @@
 <template>
-    <div style="text-align: center;">
+    <div v-if=user style="text-align: center;">
         <NavBar/>
         <h2>What are your friends eating</h2>
-        <DiscoveryFeed/>
+        <DiscoveryFeed :uid = user.uid type="self" />
         <CuisineBar/>
-        <h5>copyright@cpp-2021</h5>
+        <h5>Discovery Page</h5>
+    </div>
+    <div v-else> 
+        <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
     </div>
 </template>
 
@@ -12,6 +15,7 @@
 import NavBar from '@/components/NavBar.vue';
 import DiscoveryFeed from '../components/home-page-component/DiscoveryFeed.vue';
 import CuisineBar from '../components/home-page-component/CuisineBar.vue';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export default {
     name:"HomePage",
@@ -24,9 +28,19 @@ export default {
 
     data() {
         return {
-            user:false,
-        }
+            docID: "self",
+            user: false,
+        };
     },
+    created() {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+                console.log("Discovery Page printing userID: " + this.user.uid)
+            }
+        })
+    }
 }
 </script>
 
