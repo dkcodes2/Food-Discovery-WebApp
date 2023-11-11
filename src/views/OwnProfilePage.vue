@@ -9,13 +9,6 @@
         <div class="buttons">
           <div class="div">
             <div class="column-4">
-                <DeletePostsButton />
-              <!--  Tab icon optional to keep
-                <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a5da4435-43d4-4860-b777-0955163847f1?"
-                class="img-2"
-              /> -->
             </div>
             <div class="column-5">
                 <ShareProfileButton/>
@@ -36,7 +29,6 @@ import NavBar from "../components/NavBar.vue"
 import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
 import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
 import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
-import EditPostsButton from "../components/profile-page-components/EditPostsButton.vue";
 
 
 export default {
@@ -46,7 +38,7 @@ export default {
       UserProfileInfo,
       ShareProfileButton,
       PostsContainer,
-      EditPostsButton,
+
     },
     data() {
         return {
