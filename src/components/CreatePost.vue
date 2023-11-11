@@ -160,6 +160,7 @@ export default {
             Caption: this.caption,
             Post_Available: true,
             Image_URL: url,
+            CreatedAt: serverTimestamp(),
           });
           alert("Post created!");
         }
