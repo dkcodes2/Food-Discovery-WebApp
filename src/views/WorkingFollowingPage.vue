@@ -1,45 +1,44 @@
 <!-- FollowingPage.vue -->
 <template>
     <div class="main" v-if="user" style = "text-align: center;">
-    <!-- <div class="main" style = "text-align: center;"> -->
         <navBar />
-        <br> 
-        <userQueryDisplay  :searchText = searchString   />
-        <!-- <userQueryDisplay :searchText = searchString /> -->
+        <br>
+        <FollowerDisplay :username = username />
     </div>
     <div v-else> 
         <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
     </div>
-    
-    <p>
-        <!-- Search String: {{  searchString }} -->
-    </p>
+
+    <!-- <p>
+        Search String: {{  username }}
+    </p> -->
 
 </template>
   
   <script>
-  import { getAuth, onAuthStateChanged } from 'firebase/auth';
-
   import { ref, onMounted } from 'vue';
   import navBar from '@/components/NavBar.vue';
-  import userQueryDisplay from "@/components/UserQueryDisplay.vue";
+  import FollowerDisplay from "@/components/FollowerDisplay.vue";
+  import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { RouterLink } from 'vue-router';
   
   export default {
-    name: "UserQueryDisplayPage",
+    name: "FollowerDisplayPage",
     components: {
-        navBar,
-        userQueryDisplay,
-        
-    },
-    data () {
+    navBar,
+    FollowerDisplay,
+    RouterLink
+},
+        props: {
+            username: String
+        },
+    
+    data() {
         return {
-            user: false,
+            user: "",
         }
     },
-    props: {
-        searchString: String
-    },
-    
+
     created() {
         const auth = getAuth();
 
@@ -49,9 +48,11 @@
 
             }
         })
-    }
-    
+    }       
+
   };
+
+  
   </script>
   
   <style>

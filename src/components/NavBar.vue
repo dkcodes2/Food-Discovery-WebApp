@@ -1,5 +1,6 @@
 <template>  
   <div id="main">
+        <img class = "logo" src = "@/assets/logo_transparent.png" alt = "logo">
         <div id = "nav">
             <router-link to="HomePage" class="routerlink" style="margin-right: 1vw;"> Discover </router-link>
             <router-link to="OwnProfilePage" class="routerlink" style="margin-right: 1vw;"> Profile </router-link>
@@ -64,6 +65,13 @@ export default {
 }
 
 /* Navigation Styles */
+
+.logo {
+    display:flex;
+    width: 70px;
+    height: 70px;
+}
+
 #nav {
     display: flex;
     align-items: center;

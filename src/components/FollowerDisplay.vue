@@ -1,9 +1,9 @@
 <!-- TEMPORARILY NOT IN USE -->
 
 <template>
-    <div id="main" v-if="user">
-        <div id = "page-title">Search Results</div>
-        <div id = "user-query">You searched for: {{ searchText }} </div>
+    <div id="main" v-if="uid">
+        <div id = "page-title">Following</div>
+        <div id = "user-query"> {{ username }} is following these friends:</div>
 
         <div class="queryContainer">
             <!-- <div class="queryItem" v-for = "friend in searchList" key="friend.username"> -->
@@ -35,7 +35,7 @@
 <script>
 import drigmo2 from "../firebase.js"
 import {getFirestore} from "firebase/firestore"
-import {collection, query, where, getDocs, doc, deleteDoc, startAt, orderBy} from "firebase/firestore"
+import {collection, query, where, getDoc, getDocs, doc, deleteDoc} from "firebase/firestore"
 
 import {getStorage, ref as sref, getDownloadURL} from "firebase/storage";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -51,117 +51,61 @@ export default {
     data() {
         return {
             searchList: [],
-            
-            myUsername: "",
-            user: null,
+            uid: null
         }
     },
 
     props: {
-        searchText: String,
-        uid: String
+        username: String
     },
 
     methods: {
-        async searchFriends(stxt) {
-            console.log("search:" + this.myUsername)
-            // let q = query(collection(db, "usernames"), where('username', '>=', stxt), where("username", "<", stxt + "\uf8ff"))
-            
-            // const collectionRef = db.collection("usernames");
-            //const q = collectionRef.orderBy(firebase.firestore.FieldPath.documentId());
-            
-            // let q = query(collection(db, "usernames"), orderBy(getStorage().FilePath.documentId()), startAt(stxt)  )
+        async searchFriends() {
+            const docRef = doc(db, "usernames", this.username)
+            const docSnap = await getDoc(docRef);
+            let following = docSnap.data().following;
 
-            let q = query(collection(db, "usernames"));
-            let allDocuments = await getDocs(q)
-            
+            console.log(following);
+
             this.searchList = []
             // const docs = [];
             
-            allDocuments.forEach((doc) => {
-                let doc_data = doc.data()
+            following.forEach(async (friend) => {
+                const documentRef = doc(db, "usernames", friend)
+                const documentSnap = await getDoc(documentRef);
+                let doc_data = documentSnap.data()
+                doc_data["username"] = friend
+
+                console.log(doc_data.uid)
+                console.log(doc_data.bio)
+
+                this.searchList.push(doc_data)
+                // console.log(doc.id)
+                // if (doc.id stxt && doc.id <= stxt + "\uf8ff") {
+                //     doc_data["username"] = doc.id
+                //     // localdoc["username"] = "X";
+                //     // docs.push(doc_data)
+                //     this.searchList.push(doc_data) 
+                // }
                 
-                if (doc.id >= stxt && doc.id <= stxt + "\uf8ff" && doc.id != this.myUsername) {
-                   
-                    doc_data["username"] = doc.id
-                    // localdoc["username"] = "X";
-                    // docs.push(doc_data)
-                    this.searchList.push(doc_data) 
-                }
-
             })
-
             this.searchList.sort(function(a,b) {
                 return b.username - a.username
             });
-            // this.searchList = docs;
+
         },
 
-        async getFollowingField(uid) {
-            // console.log(uid)
-            let q = query(collection(db, "usernames"), where('uid', '==', uid))
-            // let q = query(collection(db, "usernames"));
-      
-            let allDocuments = await getDocs(q);
-
-            let doc_data = []
-            if (!allDocuments.empty) {
-                
-                doc_data = allDocuments.docs[0];
-                console.log(doc_data);
-                // this.myUsername = doc_data.id;
-
-            } else {
-                console.log("No documents found.");
-            }
-
-            return doc_data
-            // var docRef = doc(db, "usernames", username)
-            // console.log(docRef)
-
-            // const docSnapshot = await getDoc(docRef)
-            // if (docSnapshot.exists()) {
-            //     let arr = docSnapshot.data().following
-            //     return arr
-
-            // }
-        },
-    
-    
-    },
-
- 
-
-    watch: {
-        searchText: {
-            immediate: true,
-            handler(val, oldVal) {
-                console.log("watch")
-                // this.searchFriends(val)
-            }
-        }
     },
 
     created() {
-        console.log("created")
-        this.searchFriends(this.searchText)
+        this.searchFriends()
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                this.user = user;
-                this.getFollowingField(this.user.uid).then( (userObj) => {
-                    let data = userObj.data()
- 
-                    this.myUsername = userObj.id
-                    // console.log(this.myUsername)
-
-                    this.searchFriends(this.searchText)
-
-                })
+                this.uid = user.uid;
             }
         })
     }
-
-}
+    }
 
 
 </script>

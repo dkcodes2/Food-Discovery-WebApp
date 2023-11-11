@@ -12,7 +12,7 @@
 
 	  </div>
 	</div> -->
-	<div><PostItem v-for="post in posts" :key="post.id" :post="post" /></div>
+	<div><PostItem v-for="post in posts" :key="post.id" :post="post" @delete-post="handleDeletePost" @edit-post="handleEditPost"/></div>
 </template>
   
 <script>
@@ -21,6 +21,8 @@ import PostItem from "@/components/profile-page-components/PostItem.vue";
 import firebaseApp from '@/firebase.js'; // Change this to the correct path
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+
   
 const db = getFirestore(firebaseApp);
 const auth = getAuth();
@@ -61,28 +63,30 @@ export default {
 		},
 
 		handleEditPost(postId) {
-      // Logic to handle post editing
-      // This could show an edit form and update the post in the database
-    },
+    // Use the router to navigate to the CreatePostPage with the postId as a query parameter
+	console.log("editing", postId);
+    this.$router.push({ name: 'CreatePostPage', query: { postId: postId } });
+  },
 	async handleDeletePost(postId) {
-  try {
-    // Step 1: Delete the post from Firestore
-    const postRef = doc(db, "Posts", postId);
-    await deleteDoc(postRef);
+		console.log(`Deleting post with ID: ${postId}`);
 
-    // Step 2: Remove the post from the local state
-    this.posts = this.posts.filter(post => post.id !== postId);
+      try {
+        // Create a reference to the post document
+        const postRef = doc(db, "Posts", postId);
 
-    // Optional: Show a success message to the user
-    alert("Post deleted successfully!");
-  } catch (error) {
-    // Handle any errors in the deletion process
-    console.error("Error deleting post: ", error);
-    // Optional: Show an error message to the user
-    alert("Failed to delete post.");
-  }
-}
+        // Delete the post document
+        await deleteDoc(postRef);
 
+        // Remove the post from the local 'posts' array
+        this.posts = this.posts.filter(post => post.id !== postId);
+
+        // Optional: Show a success message
+        console.log("Post deleted successfully");
+      } catch (error) {
+        // Handle any errors
+        console.error("Error deleting post: ", error);
+      }
+    }
 	}
 };
 </script>
