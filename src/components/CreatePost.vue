@@ -140,7 +140,7 @@ export default {
                         Post_Image: image,
                         Post_Available: true,
                         Image_URL: url,
-                        CreatedAt: serverTimestamp()
+                        CreatedAt: serverTimestamp(),
                     }, {merge: true})
                     console.log("LOL", url)
                     alert("Post created!")

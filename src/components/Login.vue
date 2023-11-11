@@ -81,7 +81,7 @@ export default {
 
          // To direct users to the Forget Password page if they have forgotten their password
         goToForgetPassword() {
-            this.$router.push({name: 'ForgetPasswordDisplay'})
+            this.$router.push({name: 'PasswordRecoveryPage'})
         }
 
     }

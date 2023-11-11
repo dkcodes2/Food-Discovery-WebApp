@@ -3,7 +3,7 @@
         <div id="imageContainer">  
             <img :src="imageUrl || '../assets/defaultProfile.png'" alt="Profile picture">
             <input type="file" id="imageUpload" accept="image/*" @change="onImageSelected" ref="imageUpload" hidden>
-            <button type="button" @click="triggerFileUpload">Upload Image</button>
+            <button type="button" @click="triggerFileUpload" id="uploadImageButton">Upload Image</button>
             <button v-if="imageUrl" type="button" @click="deleteImage">Remove Image</button>
         </div>
 
@@ -47,6 +47,7 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase
 import { doc, setDoc, getFirestore, getDoc } from "firebase/firestore"; 
 import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { storage } from '../firebase.js'; // Ensure this path is correct for your setup
+// Other imports...
 import { arrayUnion, updateDoc } from "firebase/firestore";
 
 
@@ -265,5 +266,6 @@ input:focus {
     color: black;
     border-bottom: 1px solid #252323;
 }
+
 
 </style>

@@ -3,6 +3,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth"
 
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
+import PasswordRecoveryPage from '@/views/PasswordRecoveryPage.vue';
 import CreatePostPage from '@/views/CreatePostPage.vue';
 
 import HomePage from '@/views/HomePage.vue';
@@ -18,6 +19,7 @@ import OwnProfilePage from '@/views/OwnProfilePage.vue';
 import OthersProfilePage from '@/views/OthersProfilePage.vue';
 import FollowingPage from '@/views/FollowingPage.vue';
 import WorkingFollowingPage from '@/views/WorkingFollowingPage.vue';
+
 
 
 const auth = getAuth();
@@ -39,6 +41,14 @@ const routes = [
     name: 'CreatePostPage',
     component: CreatePostPage,
   },
+
+  {
+    path: '/passwordRecovery',
+    name: 'PasswordRecoveryPage',
+    component: PasswordRecoveryPage,
+  },
+
+
 
   {
     path: "/homepage",
