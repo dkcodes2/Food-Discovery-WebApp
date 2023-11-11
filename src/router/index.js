@@ -40,6 +40,7 @@ const routes = [
     path: '/createPost',
     name: 'CreatePostPage',
     component: CreatePostPage,
+    props: (route) => ({ postId: route.query.postId })
   },
 
   {

@@ -1,18 +1,15 @@
 <template>
+  <div>
   <NavBar style = "align-items: center;"/>
     <div class="profile-page">
       <div class="header">
         <div class="user-profile-info">
-          <UserProfileInfo />
+          <UserProfileInfo :doc-id="docID" />
         </div>
         <div class="buttons">
           <div class="div">
             <div class="column-4">
-
-                <EditPostsButton />
-
-
-                
+                <DeletePostsButton />
               <!--  Tab icon optional to keep
                 <img
                 loading="lazy"
@@ -30,7 +27,9 @@
        <PostsContainer />
       </div>
     </div>
+  </div>
 </template>
+
   
 <script>
 import NavBar from "../components/NavBar.vue"
@@ -51,20 +50,26 @@ export default {
     },
     data() {
         return {
-            viewedUser: {},  // the data of the user being viewed
-            userPosts: []    // the posts of the user being viewed
+          docID: this.$route.params.docID || 'EMAILTEST@EMAIL.COM',
+
         };
     },
     // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
 }
 </script>
 
+  
+  
 <style scoped>
 .profile-page {
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  /* Assuming .profile-page needs to be centered or specific width */
+  width: 100%; /* or set to a specific width if necessary */
+  align-items: center; /* Centers the child elements horizontally */
+  margin: auto; /* If you want to center the profile-page in the viewport */
 }
 .header {
   align-self: start;
@@ -143,18 +148,17 @@ margin: 23px -20px 0 0;
 }
 
 .div-4 {
-  display: flex;
-  flex-direction: column;
-  fill: rgba(157, 157, 157, 0.33);
+  align-self: stretch; /* Stretch to match the parent's width */
   overflow: hidden;
-  align-self: start;
   position: relative;
   display: flex;
-  min-height: 1272px;
+  flex-direction: column;
+  min-height: 1272px; /* Adjust as necessary */
+  width: 100%; /* Take full width of the parent */
+  padding: 11px 0; /* Padding top and bottom, 0 left and right */
   margin-top: 10px;
-  width: 100%;
-  padding: 11px 70px 386px 65px;
 }
+
 @media (max-width: 991px) {
   .div-4 {
     max-width: 100%;
@@ -171,5 +175,17 @@ margin: 23px -20px 0 0;
   }
 }
 
+.column-5 {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 17%;
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  .column-5 {
+    width: 100%;
+  }
+}
 
 </style>
