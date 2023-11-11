@@ -1,27 +1,24 @@
 <template>
   <div>
-  <NavBar style = "align-items: center;"/>
+    <div class="navbar-container">
+      <NavBar/>
+    </div>
     <div class="profile-page">
       <div class="header">
         <div class="user-profile-info">
           <UserProfileInfo :doc-id="docID" />
-        </div>
-        <div class="buttons">
-          <div class="div">
-            <div class="column-4">
-            </div>
-            <div class="column-5">
-                <ShareProfileButton/>
-            </div>
+          <div>
+            <ShareProfileButton/>
           </div>
         </div>
       </div>
       <div class="div-4">
-       <PostsContainer />
+        <PostsContainer />
       </div>
     </div>
   </div>
 </template>
+
 
   
 <script>
@@ -53,6 +50,21 @@ export default {
   
   
 <style scoped>
+/* Add a container for the navbar if it doesn't already exist */
+.navbar-container {
+  width: 100%; /* Full width to center navbar */
+  display: flex;
+  justify-content: center; /* Centers navbar horizontally */
+  padding: 10px 0; /* Add padding if needed */
+}
+
+/* Assuming NavBar has its own scoped styling, make sure it has a width */
+.navbar {
+  /* Set a max-width if you want to restrict its size or width: 100% to take full container width */
+  max-width: 1200px; /* Example max-width */
+  margin: 0 auto; /* Auto margins will center the navbar */
+}
+
 .profile-page {
   /* border: 1px solid #000; */
   background-color: #fff;
@@ -64,18 +76,12 @@ export default {
   margin: auto; /* If you want to center the profile-page in the viewport */
 }
 .header {
-  align-self: start;
   display: flex;
-  width: 728px;
-  max-width: 100%;
-  flex-direction: column;
-  margin: 96px 0 0 73px;
-  padding: 0 20px;
-}
-@media (max-width: 991px) {
-  .header {
-    margin-top: 40px;
-  }
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Space between child elements */
+  width: 100%; /* Full width of the parent element */
+  padding: 0 20px; /* Padding on all sides */
+  padding-left: 100px; /* Additional padding on the left, will total 40px with the above line */
 }
 .user-profile-info {
   display: flex;
