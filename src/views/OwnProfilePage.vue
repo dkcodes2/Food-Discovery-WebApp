@@ -3,31 +3,59 @@
 
   <div v-if=user>
 
+    <div class="navbar-container">
+        <NavBar style = "align-items: center;"/>
+    </div>
 
-    <NavBar style = "align-items: center;"/>
-        <div class="profile-page">
+        
+    
+    <div class="profile-page">
         <div class="header">
             <div class="user-profile-info">
             <UserProfileInfo :doc_id="docID" />
             </div>
-            <div class="buttons">
+            <!-- <div class="buttons"> -->
             <div class="div">
-                <div class="column-4">
-                </div>
-                <div class="column-5">
+                <!-- <div class="column-4"> -->
+                <!-- </div> -->
+                <!-- <div class="column-5"> -->
                     <ShareProfileButton/>
-                </div>
+                <!-- </div> -->
             </div>
-            </div>
-        </div>
+            <!-- </div> -->
+        </div><br><br>
         <div class="div-4">
         <PostsContainer :uid = user.uid type="self" />
         </div>
-        </div>
     </div>
 
+   
+    <!-- <div class="navbar-container">
+      <NavBar/>
+    </div>
+    <div class="profile-page">
+      <div class="header">
+        <div class="user-profile-info">
+          <UserProfileInfo :doc-id="docID" />
+          <div>
+            <ShareProfileButton/>
+          </div>
+        </div>
+      </div>
+      <div class="div-4">
+        <PostsContainer />
+      </div>
+    </div> -->
+
+
 </div>
+<div v-else> 
+        <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
+    </div>
+</div>
+
 </template>
+
 
   
 <script>
@@ -75,6 +103,21 @@ export default {
   
   
 <style scoped>
+/* Add a container for the navbar if it doesn't already exist */
+.navbar-container {
+  width: 100%; /* Full width to center navbar */
+  display: flex;
+  justify-content: center; /* Centers navbar horizontally */
+  padding: 10px 0; /* Add padding if needed */
+}
+
+/* Assuming NavBar has its own scoped styling, make sure it has a width */
+.navbar {
+  /* Set a max-width if you want to restrict its size or width: 100% to take full container width */
+  max-width: 1200px; /* Example max-width */
+  margin: 0 auto; /* Auto margins will center the navbar */
+}
+
 .profile-page {
   /* border: 1px solid #000; */
   background-color: #fff;
@@ -82,22 +125,17 @@ export default {
   flex-direction: column;
   /* Assuming .profile-page needs to be centered or specific width */
   width: 100%; /* or set to a specific width if necessary */
+  width: 800px;
   align-items: center; /* Centers the child elements horizontally */
   margin: auto; /* If you want to center the profile-page in the viewport */
 }
 .header {
-  align-self: start;
   display: flex;
-  width: 728px;
-  max-width: 100%;
-  flex-direction: column;
-  margin: 96px 0 0 73px;
-  padding: 0 20px;
-}
-@media (max-width: 991px) {
-  .header {
-    margin-top: 40px;
-  }
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Space between child elements */
+  width: 100%; /* Full width of the parent element */
+  padding: 0 20px; /* Padding on all sides */
+  padding-left: 100px; /* Additional padding on the left, will total 40px with the above line */
 }
 .user-profile-info {
   display: flex;

@@ -1,6 +1,6 @@
 <template>
 	<div>
-      Type: {{ type }}
+
 	  <!-- <PostItem v-for="post in posts" :key="post.id" :post="post" /> -->
 	  <PostItem v-for="post in posts" :key="post.id" :post="post" :postType = "this.type" @edit-post="handleEditPost" @delete-post="handleDeletePost"/>
 	</div>

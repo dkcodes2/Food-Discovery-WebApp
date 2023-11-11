@@ -1,29 +1,37 @@
 <template>
-  <div>
+  <div v-if = "user">
     <NavBar style = "align-items: center;"/>
     <div class="profile-page">
       <div class="header">
         <div class="user-profile-info">
             <!-- to pass username into UserProfileInfo later -->
-            <UserProfileInfo :doc_id= username /> 
-        </div>
-        <div class="buttons">
-          <div class="div">
+            <UserProfileInfo :doc_id= username /> <br>
             <div class="column-4">
               <FllwButton :username = username />
             </div>
+        </div>
+    
+        <div class="buttons">
+            
+          <div class="div">
+   
             <div class="column-5">
                 <ShareProfileButton/>
             </div>
           </div>
         </div>
       </div>
+      <br>
+      <br>
       <div class="div-4">
        <!-- <PostsContainer v-if=UID uid="aaaa" type="others"/> -->
        <PostsContainer v-if=UID :uid=UID type="others"/>
       </div>
     </div>
   </div>
+  <div v-else> 
+        <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
+    </div>
 </template>
     
   
@@ -58,7 +66,8 @@
           return {
               viewedUser: {},  // the data of the user being viewed
               userPosts: [],    // the posts of the user being viewed
-              UID: ""
+              UID: "",
+              user: false,
           };
       },
       props: {
@@ -79,6 +88,14 @@
       // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
 
       created() {
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+                console.log("OwnprofilePage printing userID: " + this.user.uid)
+            }
+        })
         // console.log("UserProfilePage created") 
         this.setTargetUID(db, this.username);
       }
@@ -97,15 +114,18 @@
   width: 100%; /* or set to a specific width if necessary */
   align-items: center; /* Centers the child elements horizontally */
   margin: auto; /* If you want to center the profile-page in the viewport */
+  width:800px;
 }
 .header {
   align-self: start;
   display: flex;
   width: 728px;
   max-width: 100%;
-  flex-direction: column;
+  /* flex-direction: column; */
   margin: 96px 0 0 73px;
   padding: 0 20px;
+  gap: 20px;
+
 }
 @media (max-width: 991px) {
   .header {
@@ -140,6 +160,8 @@
 align-self: stretch;
 padding-right: 38px;
 margin: 23px -20px 0 0;
+margin-top:50px;
+margin-left:50px;
 }
 @media (max-width: 991px) {
 .buttons {

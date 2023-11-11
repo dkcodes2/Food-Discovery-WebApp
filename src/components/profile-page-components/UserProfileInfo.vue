@@ -3,12 +3,14 @@
     <div class="profile-pic-name-and-stats">
       <div class="div">
         <div class="column">
-          <img
-            :src="userImage"
-            loading="lazy"
-            class="profile-pic"
-            alt="Profile Picture"
-          />
+          <div class="profile-pic-container">
+            <img
+              :src="userImage"
+              loading="lazy"
+              class="profile-pic"
+              alt="Profile Picture"
+            />
+          </div>
           <div class="name">{{ userName }}
             <!-- <p v-if="username"> {{ username }}</p> -->
           </div>
@@ -259,14 +261,23 @@ export default {
     width: 100%;
   }
 }
-.profile-pic {
-  aspect-ratio: 1.32;
-  object-fit: contain;
-  object-position: center;
-  width: 100%;
+.profile-pic-container {
+  width: 150px; /* Adjust this as needed */
+  height: 150px; /* Adjust this as needed */
+  border-radius: 50%;
   overflow: hidden;
-  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto; /* Center the profile picture */
 }
+
+.profile-pic {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* This will cover the area without stretching the image */
+}
+
 .name {
   color: rgba(0, 0, 0, 0.97);
   align-self: stretch;
@@ -347,7 +358,7 @@ export default {
   color: rgba(0, 0, 0, 0.97);
   align-self: stretch;
   margin: 22px -20px 0 0;
-  font: 300 30px Inter, sans-serif;
+  font: 300 24px Inter, sans-serif;
 }
 @media (max-width: 991px) {
   .biography {
