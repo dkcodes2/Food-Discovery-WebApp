@@ -1,7 +1,7 @@
 <template>
   <div id="mainContainer">  
     <div id="imageContainer">  
-      <img src="../assets/loginpicture.jpeg" alt="login picture">
+      <img src="../assets/logo_transparent.png" alt="login picture">
     </div>
     
     <div id="formContainer"> 
@@ -63,11 +63,7 @@ export default {
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then(() => {
                     alert('Successfully logged in');
-
-
-
                     this.$router.push({name: 'HomePage'}); //route name to be changed based on router
-
                 })
                 .catch(error => {
                     alert(error.message);
@@ -97,7 +93,7 @@ export default {
 }
 
 #imageContainer {
-    margin-top: 13vh;
+    margin-top: 10vh;
     flex: 0.6;
 }
 
@@ -137,8 +133,8 @@ export default {
 }
 
 #loginbutton {
-    background-color: #60cbb8;
-    border: 2px solid #60cbb8;
+    background-color: dodgerblue;
+    border: 2px solid dodgerblue;
     border-radius: 5px;
     color: rgb(255, 255, 255);
     font-weight: bold;
@@ -151,9 +147,9 @@ export default {
 }
 
 #loginbutton:hover {
-    background-color: #14a88d;
+    background-color: deepskyblue;
     color: white;
-    border: 2px solid #14a88d;
+    border: 2px solid deepskyblue;
 }
 
 #loginPrompt {
@@ -166,7 +162,7 @@ export default {
     border: none;
     margin-left: 0.3vw;
     font-size: 0.90em;
-    color: #60cbb8;
+    color: deepskyblue;
 }
 
 #createAccountBtn:hover {
@@ -193,10 +189,15 @@ input, select {
 
 input:focus {
     color: rgb(9, 8, 8);
-    outline: 3px rgba(43, 41, 41, 0.933);
+    outline: 3px solid dodgerblue; /* Updated color here */
 }
 
 .formContainer {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+#email:focus {
+    outline: 3px solid dodgerblue; /* Specific to email input */
+}
+
 </style>

@@ -80,8 +80,8 @@ input {
 #resetButton {
     width: 100%;
     padding: 15px 0; /* Increased padding for a taller button */
-    background-color: #60cbb8;
-    border: 2px solid #60cbb8;
+    background-color: dodgerblue;
+    border: 2px solid dodgerblue;
     color: white;
     font-weight: bold;
     border-radius: 5px;
@@ -90,8 +90,8 @@ input {
 }
 
 #resetButton:hover {
-    background-color: #14a88d;
-    border: 2px solid #14a88d;
+    background-color: deepskyblue;
+    border: 2px solid deepskyblue;
 }
 
 #back {

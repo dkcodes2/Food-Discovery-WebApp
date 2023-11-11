@@ -4,7 +4,7 @@
             <img :src="imageUrl || '../assets/defaultProfile.png'" alt="Profile picture">
             <input type="file" id="imageUpload" accept="image/*" @change="onImageSelected" ref="imageUpload" hidden>
             <button type="button" @click="triggerFileUpload" id="uploadImageButton">Upload Image</button>
-            <button v-if="imageUrl" type="button" @click="deleteImage">Remove Image</button>
+            <button v-if="imageUrl" type="button" @click="deleteImage" id="deleteImageButton" >Remove Image</button>
         </div>
 
         <div id="formContainer"> 
@@ -47,9 +47,6 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase
 import { doc, setDoc, getFirestore, getDoc } from "firebase/firestore"; 
 import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { storage } from '../firebase.js'; // Ensure this path is correct for your setup
-// Other imports...
-import { arrayUnion, updateDoc } from "firebase/firestore";
-
 
 export default {
     name: "SignUp",
@@ -177,12 +174,17 @@ export default {
 #imageContainer {
     flex: 0.6;
     margin-top: 13vh;
+    text-align: center; /* Center align the child elements horizontally */
+    padding: 0 20px; /* Add some padding on the sides */
 }
 
 #imageContainer img {
     width: 70%;
     height: auto;
+    max-width: 500px; /* Adjust as needed */
+    margin-bottom: 10px; /* Space between image and buttons */
 }
+
 
 /* Form Container */
 #formContainer {
@@ -230,8 +232,8 @@ input:focus {
 
 /* Button Styles */
 #submitAccountBtn {
-    background-color: #60cbb8;
-    border: 2px solid #60cbb8;
+    background-color: dodgerblue;
+    border: 2px solid dodgerblue;
     border-radius: 5px;
     color: rgb(255, 255, 255);
     font-weight: bold;
@@ -244,9 +246,9 @@ input:focus {
 }
 
 #submitAccountBtn:hover {
-    background-color: #14a88d;
+    background-color: deepskyblue;
     color: white;
-    border: 2px solid #14a88d;
+    border: 2px solid deepskyblue;
 }
 
 #loginPrompt {
@@ -259,7 +261,7 @@ input:focus {
     border: none;
     margin-left: 0.3vw;
     font-size: 0.90em;
-    color: #60cbb8;
+    color: dodgerblue;
 }
 
 #loginBtn:hover {
@@ -267,5 +269,22 @@ input:focus {
     border-bottom: 1px solid #252323;
 }
 
+#uploadImageButton, #deleteImageButton {
+    margin-top: 10px;
+    max-width: 70%; /* Adjust as per the image container width */
+    padding: 8px 16px; /* Smaller padding */
+    font-size: 14px; /* Adjust font size as needed */
+    border-radius: 5px;
+    border: 2px solid dodgerblue;
+    background-color: dodgerblue;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+#uploadImageButton:hover, #deleteImageButton:hover {
+    background-color: deepskyblue;
+    border-color: deepskyblue;
+}
 
 </style>

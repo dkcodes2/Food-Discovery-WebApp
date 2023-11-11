@@ -273,12 +273,12 @@ input[type="text"]:focus,
 input[type="file"]:focus,
 textarea:focus,
 select:focus {
-    outline: 3px solid #60cbb8; /* Change the color to fit your theme */
+    outline: 3px solid deepskyblue; /* Change the color to fit your theme */
 }
 
 /* Button Styling */
 button {
-    background-color: #60cbb8;
+    background-color: dodgerblue;
     border: none;
     border-radius: 5px;
     color: white;
@@ -294,7 +294,7 @@ button {
 }
 
 button:hover {
-    background-color: #14a88d;
+    background-color: deepskyblue;
 }
 
 /* Image upload button styling */
@@ -315,7 +315,7 @@ label[for="uploadbutton"],
 
 label[for="uploadbutton"]:hover,
 #deletebutton:hover {
-    background-color: #28642d;
+    background-color: mediumslateblue;
 }
 
 /* Placeholder Styling */
