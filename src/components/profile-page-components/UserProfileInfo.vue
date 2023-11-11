@@ -29,174 +29,6 @@
   </div>
 </template>
 
-<!-- <script>
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore"; 
-
- export default {
-  name: "UserProfileInfo",
-
-  data() {
-        return {
-            userId: null,
-            username: null
-        };
-    },
-
-  props: {
-    uid: {
-      type: String,
-      required: true
-    },
-    userName: {
-      type: String,
-      default: 'Username',
-      required: true
-    },
-    userBio: {
-      type: String,
-      default: 'This user has no biography.'
-    },
-    userImage: {
-      type: String,
-      required: true
-    },
-    userImageSrcSet: {
-      type: String,
-      default: ''
-    },
-    userPosts: {
-      type: [String, Number],
-      default: '0'
-    },
-    userFollowing: {
-      type: [String, Number],
-      default: '0'
-    }
-  },
-  data() {
-    return {
-      username: '',
-      userId: '',
-      // useremail:'',
-      // username: 'nameless',
-      // userImage: 'profile picture',
-      // userBio: 'this user has no bio yet',
-      // userPosts: 0,
-      // userFollowing: 0,
-    }
-  },
-  async created() {
-        const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, so fetch the username
-                this.userId = user.uid;
-                this.fetchUsername(this.userId);
-            } else {
-                // No user is signed in
-                this.username = "Guest";
-            }
-        });
-    },
-  
-  
-
-  methods: {
-    async fetchUsername(uid) {
-    console.log("Fetching username for UID:", uid); // Debugging line
-    const db = getFirestore();
-    const usernameDocRef = doc(db, "usernames", uid);
-    try {
-        const usernameDoc = await getDoc(usernameDocRef);
-
-        if (usernameDoc.exists()) {
-            this.username = usernameDoc.data().username;
-            console.log("Username found:", this.username); // Debugging line
-        } else {
-            console.error("No such document for username with UID:", uid);
-        }
-    } catch (error) {
-        console.error("Error fetching username:", error);
-    }
-  
-  },
-  created() {
-      const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
-          if (user) {
-              // User is signed in, so fetch the username
-              this.userId = user.uid;
-              this.fetchUsername(this.userId);
-          } else {
-              // No user is signed in
-              this.username = "Guest";
-          }
-      });
-  }
-
-    async fetchUserProfileInfo() {
-      try {
-        const userProfileRef = doc(db, 'userProfiles', this.userId);
-        const userProfileSnapshot = await getDocs(userProfileRef);
-        if (userProfileSnapshot.exists()) {
-          this.profileData = userProfileSnapshot.data();
-        } else {
-          console.error("No such profile!");
-        }
-      } catch (error) {
-        console.error("Error fetching profile: ", error);
-      }
-    } 
-}
-</script>  -->
-
-<!-- <script>
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, query, where, getDocs, collection } from "firebase/firestore";
-
-export default {
-  data() {
-    return {
-      username: "",
-    };
-  },
-  created() {
-    this.fetchUsername();
-  },
-  methods: {
-    async fetchUsername() {
-      const auth = getAuth();
-      onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          // User is signed in, so we can retrieve the UID
-          const uid = user.uid;
-          // Now, let's fetch the username associated with this UID
-          const db = getFirestore();
-          const usernamesRef = collection(db, "usernames");
-          const q = query(usernamesRef, where("uid", "==", uid));
-          
-          try {
-            const querySnapshot = await getDocs(q);
-            if (!querySnapshot.empty) {
-              // Assuming that the username is stored under a field 'username'
-              this.username = querySnapshot.docs[0].data().usernames;
-              console.log("Username found:", this.username);
-            } else {
-              console.error("No matching username for the UID:", uid);
-            }
-          } catch (error) {
-            console.error("Error fetching username:", error);
-          }
-        } else {
-          // No user is signed in
-          console.log("No user is signed in.");
-        }
-      });
-    },
-  },
-};
-</script> -->
 
 <script>
 import { getAuth } from "firebase/auth";
@@ -205,42 +37,74 @@ import { getFirestore, query, where, collection, getDocs } from "firebase/firest
 export default {
   data() {
     return {
-      username: null // This will hold the username once fetched
-    }
+      userName: 'no username',
+      userImage: null,
+      userPosts: 0,
+      userFollowing: 0,
+      userBio: 'this user has no bio'
+    };
   },
   methods: {
-    async fetchUsername() {
-      // Get the Firebase Auth instance and current user
-      const auth = getAuth();
-      const user = auth.currentUser;
-
-      if (user) {
-        // Get the Firestore instance
-        const db = getFirestore();
-
-        // Query the 'usernames' collection for a document with a 'uid' field matching the current user's uid
+    async fetchProfileData() {
+      try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        if (!user) {
+          console.log('No user is currently logged in.');
+          return;
+        }
         
+        console.log('Current user:', user); 
+        const db = getFirestore();
         const usernamesRef = collection(db, "usernames");
         const q = query(usernamesRef, where("uid", "==", user.uid));
         const querySnapshot = await getDocs(q);
-
-        // If we find the document, set the username
-        if (!querySnapshot.empty) {
-          // Assuming there's only one document with this uid
-          const userDoc = querySnapshot.docs[0];
-          this.username = userDoc.id; // The document's ID is the username
-        } else {
-          console.error('No such document for username!');
+        if (querySnapshot.empty) {
+          console.log('No documents found for the user in Firestore.');
+          return;
         }
+
+        const userData = querySnapshot.docs[0].data();
+        const docId = querySnapshot.docs[0].id;
+        
+        // Set data properties
+        this.userName = docId || 'No name';
+        this.userImage = userData.imageUrl;
+        this.userPosts = userData.posts ? userData.posts.length : 0;
+        this.userFollowing = userData.following ? userData.following.length : 0;
+        this.userBio = userData.bio || 'No bio set';
+        
+        // Update local storage with the new data
+        this.updateLocalStorage();
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
       }
-      localStorage.setItem('username', this.username);
+    },
+    updateLocalStorage() {
+      const profileData = {
+        userName: this.userName,
+        userImage: this.userImage,
+        userPosts: this.userPosts,
+        userFollowing: this.userFollowing,
+        userBio: this.userBio
+      };
+      localStorage.setItem('profileData', JSON.stringify(profileData));
     }
   },
   created() {
-    // Fetch the username when the component is created
-    this.fetchUsername();
+    const storedData = localStorage.getItem('profileData');
+    if (storedData) {
+      const profileData = JSON.parse(storedData);
+      this.userName = profileData.userName;
+      this.userImage = profileData.userImage;
+      this.userPosts = profileData.userPosts;
+      this.userFollowing = profileData.userFollowing;
+      this.userBio = profileData.userBio;
+    } else {
+      this.fetchProfileData();
+    }
   }
-}
+};
 </script>
 
 
