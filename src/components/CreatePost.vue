@@ -68,7 +68,7 @@
 <script>
 import firebaseApp from '../firebase.js'; // Ensure the path is correct
 import { ref as storageRef, getStorage, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { getFirestore, setDoc, updateDoc, doc, getDoc, collection } from 'firebase/firestore';
+import { getFirestore, setDoc, updateDoc, doc, getDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const db = getFirestore(firebaseApp);
@@ -90,6 +90,7 @@ export default {
             uid: "",
             postImageURL: "", // To hold the URL of the uploaded image
             isEditMode: false, // Flag to check if it's edit mode
+            CreatedAt: serverTimestamp(),
         };
     },
     async created() {
