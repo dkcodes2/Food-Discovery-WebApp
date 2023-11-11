@@ -20,6 +20,7 @@
         <div class="column-3">
           <div class="div-2">Following</div>
           <div class="no-of-following">{{ userFollowing }}</div>
+
         </div>
       </div>
     </div>
@@ -43,6 +44,9 @@ export default {
       userFollowing: 0,
       userBio: 'this user has no bio'
     };
+  },
+  props: {
+        docID: String,
   },
   methods: {
     async fetchProfileData() {
@@ -92,6 +96,7 @@ export default {
     }
   },
   created() {
+    console.log(this.docID);
     const storedData = localStorage.getItem('profileData');
     if (storedData) {
       const profileData = JSON.parse(storedData);
@@ -109,6 +114,7 @@ export default {
 
 
 <style scoped>
+
 .user-profile-info {
   display: flex;
   flex-direction: column;

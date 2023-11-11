@@ -1,10 +1,11 @@
 <template>
   <div>
-  <NavBar style = "align-items: center;"/>
+    <NavBar style = "align-items: center;"/>
     <div class="profile-page">
       <div class="header">
         <div class="user-profile-info">
-          <UserProfileInfo :doc-id="docID" />
+            <!-- to pass username into UserProfileInfo later -->
+            <UserProfileInfo :doc-id= username /> 
         </div>
         <div class="buttons">
           <div class="div">
@@ -31,6 +32,7 @@
   import FollowButton from "@/components/profile-page-components/FollowButton.vue";
   import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
   import FllwButton from "@/components/FllwButton.vue";
+  import NavBar from "../components/NavBar.vue"
   
   export default {
       name: "OthersProfilePage",
@@ -40,6 +42,7 @@
       FollowButton,
       ShareProfileButton,
       FllwButton,
+      NavBar,
   },
       data() {
           return {
