@@ -2,7 +2,8 @@
 	<div>
 	  <PostItem v-for="post in posts" :key="post.id" :post="post" />
 	</div>
-  </template>
+
+</template>
   
 <script>
 import PostItem from "@/components/profile-page-components/PostItem.vue";
@@ -55,7 +56,7 @@ export default {
     // Use the router to navigate to the CreatePostPage with the postId as a query parameter
 	console.log("editing", postId);
     this.$router.push({ name: 'CreatePostPage', query: { postId: postId } });
-  },
+  	},
 	async handleDeletePost(postId) {
 		console.log(`Deleting post with ID: ${postId}`);
 
