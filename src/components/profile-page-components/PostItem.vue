@@ -1,8 +1,8 @@
 <template>
   <div class="post-item">
         <!-- Edit/Delete buttons -->
-    <button @click="editPost(post.id)" class="edit-button"></button> 
-    <button @click="deletePost(post.id)" class="delete-button"></button>
+    <button @click="editPost(post.id)" v-if = "postType == 'self'" class="edit-button"></button> 
+    <button @click="deletePost(post.id)" v-if = "postType == 'self'" class="delete-button"></button>
     
     <div class="images">
       <div class="div">
@@ -34,10 +34,11 @@ const auth = getAuth();
 export default {
 	name: "PostsItem",
   props: {
+    postType: String,
     post: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     editPost(postId) {
@@ -50,6 +51,9 @@ export default {
       // Emit an event to the parent component to handle deletion
       this.$emit('delete-post', postId);
     }
+  }, 
+  created () {
+    console.log(this.postType);
   }
 };
 </script>

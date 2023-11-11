@@ -1,26 +1,32 @@
 <template>
   <div>
-  <NavBar style = "align-items: center;"/>
-    <div class="profile-page">
-      <div class="header">
-        <div class="user-profile-info">
-          <UserProfileInfo :doc-id="docID" />
-        </div>
-        <div class="buttons">
-          <div class="div">
-            <div class="column-4">
+
+  <div v-if=user>
+
+
+    <NavBar style = "align-items: center;"/>
+        <div class="profile-page">
+        <div class="header">
+            <div class="user-profile-info">
+            <UserProfileInfo :doc_id="docID" />
             </div>
-            <div class="column-5">
-                <ShareProfileButton/>
+            <div class="buttons">
+            <div class="div">
+                <div class="column-4">
+                </div>
+                <div class="column-5">
+                    <ShareProfileButton/>
+                </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
-      <div class="div-4">
-       <PostsContainer />
-      </div>
+        <div class="div-4">
+        <PostsContainer :uid = user.uid type="self" />
+        </div>
+        </div>
     </div>
-  </div>
+
+</div>
 </template>
 
   
@@ -29,6 +35,7 @@ import NavBar from "../components/NavBar.vue"
 import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
 import ShareProfileButton from "@/components/profile-page-components/ShareProfileButton.vue";
 import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
 export default {
@@ -40,12 +47,27 @@ export default {
       PostsContainer,
 
     },
+
+
+
     data() {
         return {
-          docID: this.$route.params.docID || 'EMAILTEST@EMAIL.COM',
-
+          // docID: this.$route.params.docID || 'EMAILTEST@EMAIL.COM',
+          docID: "self",
+          user: false,
         };
     },
+    created() {
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+                console.log("OwnprofilePage printing userID: " + this.user.uid)
+            }
+        })
+    }
+
     // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
 }
 </script>

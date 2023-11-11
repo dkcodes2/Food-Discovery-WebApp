@@ -5,7 +5,7 @@
       <div class="header">
         <div class="user-profile-info">
             <!-- to pass username into UserProfileInfo later -->
-            <UserProfileInfo :doc-id= username /> 
+            <UserProfileInfo :doc_id= username /> 
         </div>
         <div class="buttons">
           <div class="div">
@@ -19,7 +19,8 @@
         </div>
       </div>
       <div class="div-4">
-       <PostsContainer />
+       <!-- <PostsContainer v-if=UID uid="aaaa" type="others"/> -->
+       <PostsContainer v-if=UID :uid=UID type="others"/>
       </div>
     </div>
   </div>
@@ -27,6 +28,8 @@
     
   
   <script>
+  
+  
   import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";
   import PostsContainer from "@/components/profile-page-components/PostsContainer.vue";
   import FollowButton from "@/components/profile-page-components/FollowButton.vue";
@@ -34,6 +37,13 @@
   import FllwButton from "@/components/FllwButton.vue";
   import NavBar from "../components/NavBar.vue"
   
+  import { getFirestore, collection, query, where, getDoc, doc } from "firebase/firestore";
+  import { getAuth, onAuthStateChanged } from 'firebase/auth';
+//   import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+  import firebaseApp from '@/firebase.js';
+
+  const db = getFirestore(firebaseApp);
+
   export default {
       name: "OthersProfilePage",
       components: {
@@ -47,14 +57,32 @@
       data() {
           return {
               viewedUser: {},  // the data of the user being viewed
-              userPosts: []    // the posts of the user being viewed
+              userPosts: [],    // the posts of the user being viewed
+              UID: ""
           };
       },
-  
       props: {
           username: String,
-      }
+      },
+
+      methods: {
+        async setTargetUID(db, username) {
+            console.log(username);
+            const docRef = doc(db, "usernames", username)
+            const docSnap = await getDoc(docRef);
+            this.UID = docSnap.data().uid;
+            // console.log("OthersProfilePage setTargetUID: " + this.UID)
+        }
+      },
+  
+
       // Again, you'd use lifecycle hooks, methods, or the Composition API to fetch data, handle events, etc.
+
+      created() {
+        // console.log("UserProfilePage created") 
+        this.setTargetUID(db, this.username);
+      }
+
   }
   </script>
 
