@@ -3,17 +3,21 @@
         <div class="navbar-container">
             <NavBar style = "align-items: center;"/>
         </div>
-        <div class="cuisine-container">
-            <CuisineBar style = "align-items: center;"/>
-        </div>
-            
-        <h1>Local Cuisine</h1>
 
-        <div class="posts-container">
-            <LocalDiscoveryFeed :uid = user.uid type="self" />
+        <div class="main">
+            <div class="cuisine-container">
+                <CuisineBar style = "align-items: center;"/>
+            </div>
+            <br/><br/>
+            <h1>Local Cuisine</h1>
+
+            <div class="posts-container">
+                <LocalDiscoveryFeed :uid = user.uid type="self" />
+            </div>
+            
+            <h5>Local Cuisine</h5>
         </div>
-        
-        <h5>Local Cuisine</h5>
+
     </div>
 
     <div v-else> 
@@ -61,6 +65,10 @@ export default {
     justify-content: center; /* Centers navbar horizontally */
     padding: 10px 0; /* Add padding if needed */
     margin: 0 40px;
+}
+
+.main{
+    margin: 0px 125px;
 }
 
 .posts-container {
