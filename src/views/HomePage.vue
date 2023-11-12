@@ -1,9 +1,9 @@
 <template>
     <div id="main" v-if=user style="text-align: center;">
         <NavBar/>
+        <CuisineBar/>
         <h2>What are your friends eating</h2>
         <DiscoveryFeed :uid = user.uid type="self" />
-        <CuisineBar/>
         <h5>Discovery Page</h5>
     </div>
     <div v-else> 
