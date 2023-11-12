@@ -112,11 +112,20 @@ export default {
   display: flex;
   flex-direction: column;
   align-self: stretch;
-  margin-bottom: 20px; /* Space between posts, same as .post-item */
-  background: #f9f9f9; /* Same background color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Same box shadow */
-  border-radius: 8px; /* Same border radius */
-  overflow: hidden; /* Same overflow handling */
+  position: relative;
+  margin-bottom: 40px; /* Space between posts */
+  background: #ffffff; /* Card background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow to lift the card off the page */
+  border-radius: 8px; /* Slightly rounded corners for the card effect */
+  overflow: hidden; /* Ensures nothing spills out of the card */
+  position: relative; /* For absolute positioning of children */
+  /* background: #f9f9f9; A light grey background for better contrast with white */
+}
+
+.post {
+    background: #f9f9f9;
+    margin: 20px 0px;
+    border-radius: 20px;
 }
 
 .discovery-feed .img {

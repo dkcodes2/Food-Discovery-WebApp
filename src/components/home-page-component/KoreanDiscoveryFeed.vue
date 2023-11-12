@@ -112,7 +112,7 @@ export default {
 </script>
 
 <style scoped>
-.discovery-feed {
+.discovery-feed .post{
   display: flex;
   flex-direction: column;
   align-self: stretch;
@@ -123,7 +123,13 @@ export default {
   border-radius: 8px; /* Slightly rounded corners for the card effect */
   overflow: hidden; /* Ensures nothing spills out of the card */
   position: relative; /* For absolute positioning of children */
-  background: #f9f9f9; /* A light grey background for better contrast with white */
+  /* background: #f9f9f9; A light grey background for better contrast with white */
+}
+
+.post {
+    background: #f9f9f9;
+    margin: 20px 0px;
+    border-radius: 20px;
 }
 
 img {

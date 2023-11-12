@@ -3,17 +3,21 @@
         <div class="navbar-container">
             <NavBar style = "align-items: center;"/>
         </div>
-        <div class="cuisine-container">
-            <CuisineBar style = "align-items: center;"/>
-        </div>
-            
-        <h1>What are your friends eating</h1>
 
-        <div class="posts-container">
-            <DiscoveryFeed :uid = user.uid type="self" />
+        <div class="main">
+            <div class="cuisine-container">
+            <CuisineBar style = "align-items: center;"/>
+            </div>
+             <br/><br/>
+            <h1>What are your friends eating</h1>
+
+            <div class="posts-container">
+                <DiscoveryFeed :uid = user.uid type="self" />
+            </div>
+            
+            <h5>Discovery Page</h5>
         </div>
-        
-        <h5>Discovery Page</h5>
+
     </div>
 
     <div v-else> 
@@ -63,6 +67,9 @@ export default {
     margin: 0 40px;
 }
 
+.main{
+    margin: 0px 125px;
+}
 .posts-container {
     max-width: 100%; /* Take full width of the parent */
     display: flex;
