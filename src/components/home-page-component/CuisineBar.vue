@@ -27,6 +27,8 @@ export default {
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .cuisine-bar-button {

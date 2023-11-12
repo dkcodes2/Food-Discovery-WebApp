@@ -1,11 +1,21 @@
 <template>
-    <div id="main" v-if=user style="text-align: center;">
-        <NavBar/>
-        <CuisineBar/>
-        <h2>What are your friends eating</h2>
-        <DiscoveryFeed :uid = user.uid type="self" />
+    <div v-if=user>
+        <div class="navbar-container">
+            <NavBar style = "align-items: center;"/>
+        </div>
+        <div class="cuisine-container">
+            <CuisineBar style = "align-items: center;"/>
+        </div>
+            
+        <h1>What are your friends eating</h1>
+
+        <div class="posts-container">
+            <DiscoveryFeed :uid = user.uid type="self" />
+        </div>
+        
         <h5>Discovery Page</h5>
     </div>
+
     <div v-else> 
         <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
     </div>
@@ -45,7 +55,6 @@ export default {
 </script>
 
 <style scoped>
-
 h2 {
     text-align: left;
 }

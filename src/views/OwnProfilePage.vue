@@ -11,30 +11,22 @@
             <div class="user-profile-info">
             <UserProfileInfo :doc_id="docID" />
             </div>
-            <!-- <div class="buttons"> -->
             <div class="div">
-                <!-- <div class="column-4"> -->
-                <!-- </div> -->
-                <!-- <div class="column-5"> -->
                     <ShareProfileButton/>
-                <!-- </div> -->
             </div>
-            <!-- </div> -->
         </div><br><br>
         <div class="div-4">
           <PostsContainer :uid = user.uid type="self" />
         </div>
     </div>
-  </div>
+</div>
 <div v-else> 
         <router-link :to ="{name: 'LogInPage'}"> Go Back to Login </router-link>   
     </div>
 </div>
-
 </template>
 
 
-  
 <script>
 import NavBar from "../components/NavBar.vue"
 import UserProfileInfo from "@/components/profile-page-components/UserProfileInfo.vue";

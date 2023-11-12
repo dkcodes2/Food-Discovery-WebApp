@@ -34,16 +34,6 @@ export default {
 	, created() {
         console.log("created " + this.uid)
         this.fetchPosts(this.uid);
-
-	  	// Wait for the auth state to be resolved before fetching posts
-	  	// onAuthStateChanged(auth, user => {
-		// if (user) {
-            
-		// 	this.fetchPosts();
-		// } else {
-		//   	// Handle user not logged in or redirect to login page
-		// }
-	  	// });
 	},
   
 	methods: {
