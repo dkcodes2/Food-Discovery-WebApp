@@ -1,5 +1,5 @@
 <template>
-    <div v-if=user style="text-align: center;">
+    <div id="main" v-if=user style="text-align: center;">
         <NavBar/>
         <h2>What are your friends eating</h2>
         <DiscoveryFeed :uid = user.uid type="self" />
@@ -45,6 +45,7 @@ export default {
 </script>
 
 <style scoped>
+
 h2 {
     text-align: left;
 }

@@ -62,6 +62,10 @@ export default {
     justify-content: space-between;
     padding: 0 30px;
     margin-bottom: 20px; /* Space below navbar */
+
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Navigation Styles */
