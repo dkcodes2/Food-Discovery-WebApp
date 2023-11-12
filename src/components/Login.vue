@@ -93,18 +93,24 @@ export default {
 }
 
 #imageContainer {
-    margin-top: 10vh;
+    margin-top: 5vh; /* Smaller value moves the image up */
+    margin-right: -5vh; /* Negative value moves the image to the right */
     flex: 0.6;
 }
 
 #imageContainer img {
     width: 70%;
     height: auto;
+    position: relative; /* Add this line to enable positioning */
+    top: -10px; /* Move up slightly */
+    right: -80px; /* Move right slightly */
 }
 
 #formContainer {
     margin-top: 10vh;
     flex: 0.3;
+    max-width: 400px; /* Set a max-width for form */
+    margin: auto; /* Center the form in the flex container */
 }
 
 #headerText {
@@ -112,10 +118,24 @@ export default {
     line-height: 30px;
 }
 
+.inputFields label,
+.inputFields input,
+#forgetpw,
+#submitBtnContainer button {
+    margin-bottom: 20px; /* Increase the space below each element */
+}
+
+.inputFields input,
+.inputFields button {
+    padding: 15px; /* Increase padding for larger touch targets */
+}
+
 #forgetpw {
     background: transparent;
     border: none;
     margin-left: auto;
+    margin-top: 10px; /* Additional space above the button */
+    margin-right: 10px; /* Space to the right of the button */
     font-size: 0.80em;
     font-style: italic;
     color: grey;
@@ -136,7 +156,7 @@ export default {
     background-color: dodgerblue;
     border: 2px solid dodgerblue;
     border-radius: 5px;
-    color: rgb(255, 255, 255);
+    color: white;
     font-weight: bold;
     padding: 10px 32px;
     text-align: center;
@@ -170,10 +190,9 @@ export default {
     border-bottom: 1px solid #252323;
 }
 
-/* Your existing styles for input and form */
+/* Styles for input and form elements */
 input, select {
   width: 100%;
-  padding: 12px 20px;
   margin: 8px 0;
   display: block;
   border: 1px solid #ccc;
