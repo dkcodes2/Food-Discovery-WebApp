@@ -8,7 +8,7 @@
     <form id="resetForm" @submit.prevent="resetPassword">
       <div class="formField">
         <label for="email">Email</label>
-        <input type="email" id="email" v-model="email" placeholder="johndoe@gmail.com" required>
+        <input type="email" id="email" v-model="email" placeholder="Enter your email here" required>
       </div>
       <button id="resetButton" type="submit">Send Password Reset Link</button>
     </form>
@@ -56,19 +56,29 @@ export default {
 #header {
     display: flex;
     align-items: center;
+    justify-content: center; 
     margin-bottom: 20px;
+    width: 100%; 
+}
+
+#header h1 {
+    margin: 0;
+    font-size: 24px; 
+    white-space: nowrap; 
 }
 
 #resetForm {
-    width: 50%; /* Increased width for a wider form */
+    width: 70%; /* Increase width for a wider form */
+    max-width: 500px; /* Set a maximum width if needed */
 }
 
 .formField {
     margin-bottom: 20px;
 }
 
-input {
-    width: 100%;
+input[type="email"] { /* Targeting only email input */
+    width: auto;
+    min-width: 250px; 
     padding: 12px 20px;
     margin: 8px 0;
     border: 1px solid #ccc;
@@ -78,15 +88,19 @@ input {
 }
 
 #resetButton {
-    width: 100%;
-    padding: 15px 0; /* Increased padding for a taller button */
+    width:auto; 
+    min-width: 250px; 
+    padding: 15px 0; 
     background-color: dodgerblue;
     border: 2px solid dodgerblue;
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 18px; 
     transition-duration: 0.4s;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
 #resetButton:hover {
@@ -95,16 +109,19 @@ input {
 }
 
 #back {
-    padding: 8px 16px;
+    padding: 8px 16px; 
     border: none;
     background-color: #f1f1f1;
     color: black;
-    border-radius: 50%;
+    border-radius: 20px; 
     margin-right: 10px;
+    font-size: 16px; 
+    cursor: pointer; 
 }
 
 #back:hover {
     background-color: #ddd;
     color: black;
 }
+
 </style>
