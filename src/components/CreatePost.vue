@@ -331,6 +331,7 @@ button:hover {
 }
 
 /* Image upload button styling */
+
 label[for="uploadbutton"],
 #deletebutton {
     display: inline-block;
@@ -345,6 +346,19 @@ label[for="uploadbutton"],
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }
+
+/* Add margin to create space between the buttons */
+label[for="uploadbutton"] {
+    margin-right: 4%; /* Add margin to the right of the upload button */
+}
+
+#deletebutton {
+    margin-left: 4%; /* Add margin to the left of the delete button */
+    background-color: #be4a4a;
+    border-color: #b02c2c;
+}
+/* Other styles remain the same */
+
 
 label[for="uploadbutton"]:hover,
 #deletebutton:hover {
