@@ -1,20 +1,17 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
 import {getAuth, onAuthStateChanged} from "firebase/auth"
 
 import LogInPage from '@/views/LogInPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
 import PasswordRecoveryPage from '@/views/PasswordRecoveryPage.vue';
 import CreatePostPage from '@/views/CreatePostPage.vue';
-
 import HomePage from '@/views/HomePage.vue';
 import Japanese from '@/views/Japanese.vue';
 import Korean from '@/views/Korean.vue';
 import Western from '@/views/Western.vue';
 import Local from '@/views/Local.vue';
 import Others from '@/views/Others.vue';
-
 import userQueryDisplayPage from '@/views/userQueryDisplayPage.vue';
-
 import OwnProfilePage from '@/views/OwnProfilePage.vue'; 
 import OthersProfilePage from '@/views/OthersProfilePage.vue';
 import FollowingPage from '@/views/FollowingPage.vue';
