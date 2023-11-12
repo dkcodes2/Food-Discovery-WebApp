@@ -47,10 +47,19 @@ export default {
       this.$emit('edit-post', postId);
     },
     deletePost(postId) {
+      // Log the click and the ID for debugging purposes
       console.log('Delete button clicked:', postId);
-      // Emit an event to the parent component to handle deletion
-      this.$emit('delete-post', postId);
+
+      // Show confirmation dialog before emitting the delete event
+      if (window.confirm('Are you sure you want to delete this post?')) {
+        // Emit an event to the parent component to handle deletion
+        this.$emit('delete-post', postId);
+      } else {
+        // If the user clicks "Cancel", log cancellation or handle as needed
+        console.log('Deletion cancelled.');
+      }
     }
+
   }, 
   created () {
     console.log(this.postType);
