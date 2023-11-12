@@ -93,7 +93,7 @@
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 this.user = user;
-                console.log("OwnprofilePage printing userID: " + this.user.uid)
+                console.log("OthersprofilePage printing userID: " + this.user.uid)
             }
         })
         // console.log("UserProfilePage created") 

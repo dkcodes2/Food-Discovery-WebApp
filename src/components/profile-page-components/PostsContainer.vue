@@ -53,7 +53,7 @@ export default {
 		// if (user) {
 		  	const postsRef = collection(db, "Posts");
 		  	// Make sure to use the correct field name for UserID
-		  	const q = query(postsRef, where("UserID", "==", user.uid), orderBy("CreatedAt", "desc"));
+		  	const q = query(postsRef, where("UserID", "==", uid), orderBy("CreatedAt", "desc"));
 		  	const querySnapshot = await getDocs(q);
 		  	this.posts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 		// }
