@@ -158,7 +158,6 @@ export default {
             TypeOfCuisine: this.typeofcuisine,
             PricePoint: this.pricepoint,
             Caption: this.caption,
-            Post_Available: true,
             Image_URL: url,
             CreatedAt: serverTimestamp(),
           });
