@@ -11,7 +11,7 @@ import Korean from '@/views/Korean.vue';
 import Western from '@/views/Western.vue';
 import Local from '@/views/Local.vue';
 import Others from '@/views/Others.vue';
-import userQueryDisplayPage from '@/views/userQueryDisplayPage.vue';
+import userQueryDisplayPage from '@/views/UserQueryDisplayPage.vue';
 import OwnProfilePage from '@/views/OwnProfilePage.vue'; 
 import OthersProfilePage from '@/views/OthersProfilePage.vue';
 import FollowingPage from '@/views/FollowingPage.vue';
