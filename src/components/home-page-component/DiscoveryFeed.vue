@@ -108,39 +108,40 @@ export default {
 </script>
 
 <style scoped>
-.discovery-feed {
+.discovery-feed .post {
   display: flex;
   flex-direction: column;
   align-self: stretch;
-  position: relative;
-  margin-bottom: 40px; /* Space between posts */
-  background: #ffffff; /* Card background color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow to lift the card off the page */
-  border-radius: 8px; /* Slightly rounded corners for the card effect */
-  overflow: hidden; /* Ensures nothing spills out of the card */
-  position: relative; /* For absolute positioning of children */
-  background: #f9f9f9; /* A light grey background for better contrast with white */
+  margin-bottom: 20px; /* Space between posts, same as .post-item */
+  background: #f9f9f9; /* Same background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Same box shadow */
+  border-radius: 8px; /* Same border radius */
+  overflow: hidden; /* Same overflow handling */
 }
 
-img {
-  max-width: 100%; /* ensures image is not wider than its container */
-  height: auto; /* maintains the aspect ratio */
+.discovery-feed .img {
+  width: 100%; /* Same as .post-item .img */
+  height: auto; /* Adjust as needed, similar to .post-item .img */
+  object-fit: cover; /* Same object-fit */
+  border-top-left-radius: 8px; /* Same border radius */
+  border-top-right-radius: 8px; /* Same border radius */
 }
 
-.caption {
-  color: rgba(0, 0, 0, 0.97);
-  margin-top: 22px;
-  margin-left: 15px; /* Space from the left edge of the card */
-  margin-right: 15px; /* Space from the right edge of the card */
-  font: 700 30px Inter, sans-serif;
+.discovery-feed .caption {
+  color: rgba(0, 0, 0, 0.97); /* Same color */
+  margin-top: 22px; /* Same margin */
+  margin-left: 15px; /* Same margin */
+  margin-right: 15px; /* Same margin */
+  font: 700 30px Inter, sans-serif; /* Same font */
 }
 
-.description {
-  color: rgba(0, 0, 0, 0.97);
-  margin-top: 28px;
-  margin-left: 15px; /* Space from the left edge of the card */
-  margin-right: 15px; /* Space from the right edge of the card */
-  margin-bottom: 15px; /* Space from the bottom edge of the card */
-  font: 300 18px Inter, sans-serif; /* Adjusted font size for post details */
+.discovery-feed .description {
+  color: rgba(0, 0, 0, 0.97); /* Same color */
+  margin-top: 28px; /* Same margin */
+  margin-left: 15px; /* Same margin */
+  margin-right: 15px; /* Same margin */
+  margin-bottom: 15px; /* Same margin */
+  font: 300 18px Inter, sans-serif; /* Same font */
 }
+
 </style>

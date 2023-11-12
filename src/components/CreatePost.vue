@@ -357,8 +357,6 @@ label[for="uploadbutton"] {
     background-color: #be4a4a;
     border-color: #b02c2c;
 }
-/* Other styles remain the same */
-
 
 label[for="uploadbutton"]:hover,
 #deletebutton:hover {
