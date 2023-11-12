@@ -68,7 +68,7 @@ export default {
 }
 
 .main{
-    margin: 0px 125px;
+    width:80vw;
 }
 
 .posts-container {

@@ -9,7 +9,7 @@
                 <CuisineBar style = "align-items: center;"/>
             </div>
             <br/><br/>
-            <h1>Japanese Food</h1>
+            <h1>Japanese Cuisine</h1>
 
             <div class="posts-container">
                 <JapaneseDiscoveryFeed :uid = user.uid type="self" />
@@ -68,7 +68,7 @@ export default {
 }
 
 .main{
-    margin: 0px 125px;
+    width:80vw;
 }
 
 .posts-container {

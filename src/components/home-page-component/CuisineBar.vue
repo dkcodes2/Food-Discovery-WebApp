@@ -29,6 +29,7 @@ export default {
   padding: 10px 0;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
+  width:inherit;
 }
 
 .cuisine-bar-button {
