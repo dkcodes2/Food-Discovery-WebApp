@@ -15,7 +15,7 @@
                 <JapaneseDiscoveryFeed :uid = user.uid type="self" />
             </div>
             
-            <h5>Japenese Cuisine</h5>
+            <h5>Japanese Cuisine</h5>
         </div>
  
     </div>
