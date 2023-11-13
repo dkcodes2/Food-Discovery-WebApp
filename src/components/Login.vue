@@ -70,12 +70,12 @@ export default {
                 });
         },
     
-          // To direct users to the Sign Up page if they have not yet created an account
+
         goToSignUp() {
             this.$router.push({name: 'SignUpPage'})
         },
 
-         // To direct users to the Forget Password page if they have forgotten their password
+
         goToForgetPassword() {
             this.$router.push({name: 'PasswordRecoveryPage'})
         }
