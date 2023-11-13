@@ -112,6 +112,11 @@ const routes = [
     component: WorkingFollowingPage,
 
     props: route => ({username: route.query.q})
+  },
+
+  {
+    path: '/:pathMatch(.*)*', // This is a regex pattern for Vue Router 4 that matches everything
+    redirect: '/' // Redirect to the login page
   }
 ];
 
