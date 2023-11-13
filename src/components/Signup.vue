@@ -1,7 +1,7 @@
 <template>
     <div id="mainContainer">  
         <div id="imageContainer">  
-            <img id="profilephoto" :src="imageUrl ? imageUrl : '../assets/defaultProfile.png'" alt="Profile picture">
+            <img id="profilephoto" :src="imageUrl ? imageUrl : '../src/assets/defaultProfile.png'" alt="Profile picture">
 
             <input type="file" id="imageUpload" accept="image/*" @change="onImageSelected" ref="imageUpload" hidden>
             <button type="button" @click="triggerFileUpload" id="uploadImageButton">Upload Image</button>
@@ -123,6 +123,11 @@ export default {
                 const unique = await this.isUsernameUnique(this.name);
                 if (!unique) {
                     alert('Username is already taken. Please choose a different one.');
+                    return;
+                }
+
+                if (!this.imageFile) {
+                    alert('Please upload a profile picture to continue.');
                     return;
                 }
 
