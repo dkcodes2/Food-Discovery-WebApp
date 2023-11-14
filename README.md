@@ -1,6 +1,11 @@
 # drigmo2
 
-This template should help get you started developing with Vue 3 in Vite.
+Inspired by the success of Drigmo, we created a clone to redefine how people connect through their passion for food. We've developed a platform that effortlessly enables users to document and share their food recommendations with friends, fostering trust and reliability in food reviews. Our app aims to empower users with personalised culinary discoveries, connecting them with friends who share the same tastes and love for food.
+- Clone created by NUS students
+
+Check out our web app: https://drigmo2-8f507.web.app/
+The inspiration: https://www.drigmo.com/ 
+
 
 ## Recommended IDE Setup
 
